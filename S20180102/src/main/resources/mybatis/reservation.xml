@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RservDto">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="RServResult" type="ReservDto">
+		<result property="memberId" column="memberId" />
+		<result property="gServNo" column="gServNo" />
+		<result property="gNo" column="gNo" />
+		<result property="payCode" column="payCode" />
+		<result property="reservDate" column="reservDate" />
+		<result property="tourDate" column="tourDate" />
+		<result property="pay_yn" column="pay_yn" />
+		<result property="reMemSize" column="reMemSize" />
+		<result property="cancel_yn" column="cancel_yn" />
+		<result property="success_yn" column="success_yn" />
+		<result property="confirm" column="confirm" />
+		<result property="gServTitle" column="gServTitle" />
+		<result property="amount" column="amount" />
+		<result property="rvNum" column="rvNum" />
+	</resultMap>
+
+
+
+	<select id="selReservList" parameterType="PagingDto" resultMap="RServResult">
+		select * from (select rownum rn, b.*, a.gServTitle, (b.rememSize*a.gservprice) amount 
+		from reservation b, gService a 
+		where a.gservno=b.GSERVNO and b.memberID ='${memberId}' and b.pay_yn='n' and b.cancel_yn='n' 
+		order by b.reservdate desc) 
+		where rn between ${start} and ${end}
+	</select>
+
+	<select id="totalResv" parameterType="java.lang.String"
+		resultType="int">
+		select count(*) from reservation where memberId='${value}' and pay_yn='n' and cancel_yn='n'
+	</select>
+
+	<select id="total_Complete" parameterType="java.lang.String"
+		resultType="int">
+		select count(*) from reservation where memberId='${value}' and success_yn='y'
+	</select>
+
+	<select id="oneResv" parameterType="java.lang.String" resultMap="RServResult">
+		select b.*, a.gServTitle, (b.rememSize*a.gservprice) amount from
+		reservation b, gService a where a.gservno=b.GSERVNO and
+		payCode='${value}'
+	</select>
+
+	<select id="completeList" parameterType="PagingDto" resultMap="RServResult">
+		select * from (
+			select rownum rn, b.*, a.gServTitle, 
+				(select count(*) from review c where b.gservno=c.gservno and b.memberId=c.memberId) rvNum 
+			from reservation b, gService a 
+			where a.gservno=b.GSERVNO and b.memberID ='${memberId }' and
+		          b.success_yn='y' order by b.tourdate desc) 
+		where rn between ${start } and ${end }
+	</select>
+	
+	
+	<update id="resvCancel" parameterType="java.lang.String">
+		update reservation set cancel_yn='y' where payCode='${value}'
+	</update>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDto">
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <resultMap id="MemberResult" type="MemberDto">
+    <result property="memberId" column="memberId"/>
+    <result property="nickName" column="nickName"/>
+    <result property="pw" column="pw"/>
+    <result property="tel" column="tel"/>
+    <result property="addr" column="addr"/>
+    <result property="mName" column="mName"/>
+    <result property="regidate" column="regidate"/>
+    <result property="mPoint" column="mPoint"/>
+    <result property="authority" column="authority"/>
+  </resultMap>
+  
+
+  
+   <select id="selMember" parameterType="java.lang.String" resultMap="MemberResult">
+   		select * from member where memberId='${value}'
+   </select>
+   
+
+</mapper>
