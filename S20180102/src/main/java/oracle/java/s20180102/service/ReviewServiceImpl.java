@@ -7,32 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;  //
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import oracle.java.s20180102.dao.ReviewDao;
 import oracle.java.s20180102.dao.WishDao;
 import oracle.java.s20180102.model.GServDto;
 import oracle.java.s20180102.model.PagingDto;
 import oracle.java.s20180102.model.PayDto;
+import oracle.java.s20180102.model.ReviewDto;
 import oracle.java.s20180102.model.TourCardDto;
 import oracle.java.s20180102.model.WishDto;
 
 @Service
-public class WishServiceImpl implements WishService{
+public class ReviewServiceImpl implements ReviewService{
 	@Autowired
-	private WishDao wDao;
+	private ReviewDao revDao;
 
 	@Override
-	public List<TourCardDto> selWishList(PagingDto pdto) {
-		return wDao.selWishList(pdto);
+	public void inReview(ReviewDto revDto) {
+		revDao.inReview(revDto);
 	}
 
 	@Override
-	public int totalWish(String ID) {
-		return wDao.totalWish(ID);
+	public ReviewDto oneReview(ReviewDto revDto) {
+		return revDao.oneReview(revDto);
 	}
 
 	@Override
-	public void delWishList(WishDto wdto) {
-		wDao.delWishList(wdto);
+	public void upReview(ReviewDto revDto) {
+		revDao.upReview(revDto);
 	}
+
+
 
 	
 }

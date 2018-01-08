@@ -8,6 +8,16 @@
 <body> 
 <%
  //response.sendRedirect("wishList.do");     
- response.sendRedirect("reservation_member.do");
+ //response.sendRedirect("reservation_member.do");
+ //response.sendRedirect("review_member.do");
+ //response.sendRedirect("pay_member.do");
+ 
+ 
+ //------태욱 -----------------
+ 
+    response.sendRedirect("service_guide.do?gNo=10001");     // 예시
+  //response.sendRedirect("selGServForm.do?gServNo=10001001");     // 예시
+ 
+ //---------------------------
 %>
 </body>

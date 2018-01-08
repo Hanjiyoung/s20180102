@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header_detail.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,6 +12,7 @@
 		padding-left:250px;
 	}
 </style>
+
 </head>
 <body>
 <jsp:include page="memberBar.jsp"></jsp:include>
@@ -25,7 +26,6 @@
 			<th>상품명</th>
 			<th>투어일자</th>
 			<th>결제금액</th>
-			<th>계좌상세정보</th>
 			<th>주문상태</th>
 		</tr>
 		<c:if test="${total > 0 }">
@@ -35,7 +35,6 @@
 					<td><a href="detail_tour.do?gServNo=${list.gServNo }">${list.gServTitle }</a></td>
 					<td>${list.tourDate }</td>
 					<td>${list.amount }</td>
-					<td><input type="button" value="계좌 상세정보" onclick="function()"></td>
 					<td>결제완료(${list.pay_method })</td>
 				</tr>
 				<c:set var="startNum" value="${startNum -1 }" />

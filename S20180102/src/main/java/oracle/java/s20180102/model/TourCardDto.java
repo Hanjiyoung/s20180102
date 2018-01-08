@@ -1,16 +1,45 @@
 package oracle.java.s20180102.model;
 
-public class ServiceDto {
+public class TourCardDto {
+	private String rn;
 	private String imgSrc;
 	private String gImg;
 	private String nickName;
 	private String gServTitle;
 	private String gServSub;
-	private int gServLeadTime;
-	private int like;
-	private int remainMember;
+	private String gServLeadTime;
+	private String gServPrice;
+	
+	private int likeIt;
+	private int remainSize;
+	private int gServNo;
+		
 	
 	
+	public String getgServPrice() {
+		return gServPrice;
+	}
+	public void setgServPrice(String gServPrice) {
+		this.gServPrice = gServPrice;
+	}
+	public int getgServNo() {
+		return gServNo;
+	}
+	public void setgServNo(int gServNo) {
+		this.gServNo = gServNo;
+	}
+	public int getLikeIt() {
+		return likeIt;
+	}
+	public void setLikeIt(int likeIt) {
+		this.likeIt = likeIt;
+	}
+	public String getRn() {
+		return rn;
+	}
+	public void setRn(String rn) {
+		this.rn = rn;
+	}
 	public String getImgSrc() {
 		return imgSrc;
 	}
@@ -41,24 +70,21 @@ public class ServiceDto {
 	public void setgServSub(String gServSub) {
 		this.gServSub = gServSub;
 	}
-	public int getgServLeadTime() {
+	
+	public String getgServLeadTime() {
 		return gServLeadTime;
 	}
-	public void setgServLeadTime(int gServLeadTime) {
+	public void setgServLeadTime(String gServLeadTime) {
 		this.gServLeadTime = gServLeadTime;
 	}
-	public int getLike() {
-		return like;
+
+	public int getRemainSize() {
+		return remainSize;
 	}
-	public void setLike(int like) {
-		this.like = like;
+	public void setRemainSize(int remainSize) {
+		this.remainSize = remainSize;
 	}
-	public int getRemainMember() {
-		return remainMember;
-	}
-	public void setRemainMember(int remainMember) {
-		this.remainMember = remainMember;
-	}
+	
 
 	
 }

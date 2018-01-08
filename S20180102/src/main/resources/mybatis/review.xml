@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewDto">
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <resultMap id="RevResult" type="ReviewDto">
+    <result property="memberId" column="memberId"/>
+    <result property="gServNo" column="gServNo"/>
+    <result property="nickName" column="nickName"/>
+    <result property="rTitle" column="rTitle"/>
+    <result property="rContent" column="rContent"/>
+    <result property="rImg" column="rImg"/>
+    <result property="rStar" column="rStar"/>
+    <result property="rHit" column="rHit"/>
+    <result property="rGroup" column="rGroup"/>
+    <result property="rStep" column="rStep"/>
+    <result property="rIndent" column="rIndent"/>
+    <result property="rCredate" column="rCredate"/>
+    <result property="gServTitle" column="gServTitle"/>
+  </resultMap>
+  
+  
+   <insert id="inReview" parameterType="ReviewDto">
+   		  insert into review values (
+   		  		'${memberId}', ${gServNo}, '${nickName}', '${rTitle}',
+   		  		'${rContent}', '${rImg}', ${rStar}, 0, review_seq.nextval,
+   		  		0, 0, sysdate)
+   </insert>
+   
+   <select id="oneReview" parameterType="ReviewDto" resultMap="RevResult">
+  	 	   select rev.*, gs.gServTitle
+   			 from review rev, gService gs
+   		    where memberId='${memberId}'
+   			  and rev.gServNo=${gServNo}
+   			  and rev.gServNo = gs.gServNo
+   </select>
+   
+   <update id="upReview" parameterType="ReviewDto">
+   		update review
+   		   set rTitle ='${rTitle}', rContent='${rContent}', rImg ='${rImg}',
+   		       rStar  ='${rStar}', rHit=0, rGroup=review_seq.nextval, 
+   		       rStep=0, rIndent=0, rCredate=sysdate 
+   		 where memberId='${memberId}' and gServNo=${gServNo}
+   </update>
+   
+</mapper>

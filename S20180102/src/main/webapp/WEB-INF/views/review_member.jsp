@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ include file="header_detail.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +16,7 @@
 </head>
 <body>
 <jsp:include page="memberBar.jsp"></jsp:include>
+
 <section class="body">
 <h2>나의 후기 관리</h2>
 
@@ -33,11 +35,13 @@
 				<td>${list.reservDate }</td>
 					<c:if test="${list.rvNum >0 }">
 						<td><input type="button" value="후기보기"></td>
-						<td><input type="button" value="후기수정"></td>
+						<td><input type="button" value="후기수정" onclick="location.href='updateReviewForm.do?gServNo=${list.gServNo}'"></td>
 						<td>댓글 수 : ${list.rvNum-1 }</td>
 					</c:if>
 					<c:if test="${list.rvNum == 0 }">
-						<td><input type="button" value="후기작성"></td>
+						<td>
+						  <input type="button" value="후기작성" onclick="location.href='writeReviewForm.do?payCode=${list.payCode}'">
+						</td>
 					</c:if>
 				</tr>
 			<c:set var="num" value="${num - 1 }"></c:set>

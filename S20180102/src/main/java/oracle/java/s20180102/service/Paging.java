@@ -21,6 +21,22 @@ public class Paging {
 		}
 	}
 
+	public Paging(int total, String currentPage1, int rowPage) {
+		this.total = total;
+		if (currentPage1 != null) {
+			this.currentPage = Integer.parseInt(currentPage1);			
+		}
+		start = (currentPage - 1) * rowPage + 1; 
+		end   = start + rowPage - 1;            
+		totalPage = (int) Math.ceil((double)total / rowPage); 
+		startPage = currentPage - (currentPage - 1) % pageBlock; 
+		endPage = startPage + pageBlock - 1;
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
+	}
+
+	
 	public int getCurrentPage() {	return currentPage;	}
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;

@@ -1,5 +1,7 @@
 package oracle.java.s20180102.model;
 
+import java.sql.Date;
+
 public class ReviewDto {
 	private String memberId;
 	private int gServNo;
@@ -12,8 +14,20 @@ public class ReviewDto {
 	private int rGroup;
 	private int rStep;
 	private int rIndent;
-	private int rCredate;
+	private Date rCredate;
 	
+	
+	
+	private String gServTitle;
+	
+	
+	
+	public String getgServTitle() {
+		return gServTitle;
+	}
+	public void setgServTitle(String gServTitle) {
+		this.gServTitle = gServTitle;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -80,12 +94,13 @@ public class ReviewDto {
 	public void setrIndent(int rIndent) {
 		this.rIndent = rIndent;
 	}
-	public int getrCredate() {
+	public Date getrCredate() {
 		return rCredate;
 	}
-	public void setrCredate(int rCredate) {
+	public void setrCredate(Date rCredate) {
 		this.rCredate = rCredate;
 	}
+	
 	
 	
 }

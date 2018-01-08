@@ -27,7 +27,41 @@ public class GServDto {
 	private Date gServFixDate;
 	private String gServLock;
 	
+	// 추가 항목
 	
+	private int start;
+	private int end;
+	private String subName;
+	private String areaName;
+	
+	//
+	
+	public String getSubName() {
+		return subName;
+	}
+	public void setSubName(String subName) {
+		this.subName = subName;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public int getgNo() {
 		return gNo;
 	}

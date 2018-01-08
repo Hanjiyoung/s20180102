@@ -17,38 +17,38 @@ import oracle.java.s20180102.model.WishDto;
 @Service
 public class ReservServiceImpl implements ReservService{
 	@Autowired
-	private ReservDao rsvDao;
+	private ReservDao resDao;
 
 	@Override
 	public int totalResv(String ID) {
 		
-		return rsvDao.totalResv(ID);
+		return resDao.totalResv(ID);
 	}
 
 	@Override
 	public List<ReservDto> selReservList(PagingDto pdto) {
 		
-		return rsvDao.selReservList(pdto);
+		return resDao.selReservList(pdto);
 	}
 
 	@Override
 	public ReservDto oneResv(String payCode) {
-		return rsvDao.oneResv(payCode);
+		return resDao.oneResv(payCode);
 	}
 
 	@Override
 	public int total_Complete(String ID) {
-		return rsvDao.total_Complete(ID);
+		return resDao.total_Complete(ID);
 	}
 
 	@Override
 	public List<ReservDto> completeList(PagingDto pdto) {
-		return rsvDao.completeList(pdto);
+		return resDao.completeList(pdto);
 	}
 
 	@Override
 	public void resvCancel(String payCode) {
-		rsvDao.resvCancel(payCode);
+		resDao.resvCancel(payCode);
 	}
 
 

@@ -3,8 +3,6 @@ package oracle.java.s20180102.model;
 public class PagingDto {
 	private String memberId;
 	
-
-
 	private String search;   private String keyword;
 	private String pageNum;  
 	private int start; 		 private int end;

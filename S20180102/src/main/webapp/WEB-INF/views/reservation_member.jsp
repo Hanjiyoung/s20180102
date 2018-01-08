@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header_detail.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,6 +23,7 @@
 </head>
 <body>
 <jsp:include page="memberBar.jsp"></jsp:include>
+
 <section class="body">
 <h2>나의 예약 현황</h2>
 
@@ -48,11 +49,11 @@
 				<td>${list.tourDate }</td>
 				<td>${list.amount }</td>
 				<td>${list.confirm }</td>
-				<td><input type="button" value="결제" onclick="location.href='payPage.do?payCode=${list.payCode}'"></td>
+				<td><input type="button" value="결제" onclick="location.href='selPayForm.do?payCode=${list.payCode}'"></td>
 				<td>
-					<form action="resvCancle.do">
+					<form action="delResvPro.do" onsubmit="return chk()">
 						<input type="hidden" name="payCode" value='<c:out value="${list.payCode }"/>'>
-						<input type="submit" value="예약취소" onclick="chk()">
+						<input type="submit" value="예약취소">
 					</form>
 				</td>
 				</tr>
