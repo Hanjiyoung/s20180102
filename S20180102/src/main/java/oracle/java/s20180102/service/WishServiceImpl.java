@@ -34,5 +34,15 @@ public class WishServiceImpl implements WishService{
 		wDao.delWishList(wdto);
 	}
 
+	@Override
+	public void inWishList(WishDto wDto) {
+		wDao.inWishList(wDto);
+	}
+
+	@Override
+	public int wishCheck(WishDto wdto) {
+		return wDao.wishCheck(wdto);
+	}
+
 	
 }

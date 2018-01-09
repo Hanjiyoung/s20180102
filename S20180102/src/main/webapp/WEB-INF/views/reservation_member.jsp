@@ -37,27 +37,29 @@
 		<th>총가격</th>
 		<th>확정여부</th>
 		<th>결제</th>
+		<th>예약수정</th>
 		<th>예약취소</th>
 	</tr>
 	<c:if test="${total > 0 }">
 		<c:forEach var="list" items="${list }">
-			<tr>
-				<td>${list.payCode }</td>
-				<td><a href="detail_tour.do?gServNo=${list.gServNo }">${list.gServTitle }</a></td>
-				<td>${list.reMemSize }</td>
-				<td>${list.reservDate }</td>
-				<td>${list.tourDate }</td>
-				<td>${list.amount }</td>
-				<td>${list.confirm }</td>
-				<td><input type="button" value="결제" onclick="location.href='selPayForm.do?payCode=${list.payCode}'"></td>
-				<td>
-					<form action="delResvPro.do" onsubmit="return chk()">
-						<input type="hidden" name="payCode" value='<c:out value="${list.payCode }"/>'>
-						<input type="submit" value="예약취소">
-					</form>
-				</td>
-				</tr>
+			<form action="delResvPro.do" onsubmit="return chk()">
+			<input type="hidden" name="payCode" value='<c:out value="${list.payCode }"/>'>
+				<tr>
+					<td>${list.payCode }</td>
+					<td><a href="tour_detail.do?gServNo=${list.gServNo }">${list.gServTitle }</a></td>
+					<td>${list.reMemSize }</td>
+					<td>${list.reservDate }</td>
+					<td>${list.tourDate }</td>
+					<td><fmt:formatNumber value = "${list.amount }" type="currency" currencySymbol="\\"/></td>
+					<td>${list.confirm }</td>
+					<td><input type="button" value="결제" onclick="location.href='selPayForm.do?payCode=${list.payCode}'"></td>
+					<td><input type="button" value="예약수정" onclick="location.href='upResvForm.do?payCode=${list.payCode}'"></td>
+					<td>
+							<input type="submit" value="예약취소">
+					</td>
+					</tr>
 			<c:set var="num" value="${num - 1 }"></c:set>
+			</form>
 		</c:forEach>
 	</c:if>
 	<c:if test="${total ==0 }">

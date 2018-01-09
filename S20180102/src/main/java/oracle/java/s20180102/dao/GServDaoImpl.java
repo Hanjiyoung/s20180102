@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import oracle.java.s20180102.model.ContentsDto;
 import oracle.java.s20180102.model.GServDto;
+import oracle.java.s20180102.model.ReservDto;
+import oracle.java.s20180102.model.TourCardDto;
 
 @Repository
 public class GServDaoImpl implements GServDao{
@@ -32,5 +34,10 @@ public class GServDaoImpl implements GServDao{
 	public List<ContentsDto> selCont(int gServNo) {
 		// TODO Auto-generated method stub
 		return session.selectList("listContents", gServNo);
+	}
+
+	@Override
+	public TourCardDto oneTourCard(ReservDto resvDto) {
+		return session.selectOne("oneTourCard", resvDto);
 	}
 }

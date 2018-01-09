@@ -13,9 +13,16 @@ public class TourCardDto {
 	private int likeIt;
 	private int remainSize;
 	private int gServNo;
+	private int heart;
 		
 	
 	
+	public int getHeart() {
+		return heart;
+	}
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
 	public String getgServPrice() {
 		return gServPrice;
 	}

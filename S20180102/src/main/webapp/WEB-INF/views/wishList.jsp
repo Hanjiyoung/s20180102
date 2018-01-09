@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header_detail.jsp" %>
+<%
+	String context = request.getContextPath();
+%>
 <!DOCTYPE>
 <html>
 <head>
@@ -21,7 +24,7 @@
 		if(confirm("정말 삭제하시겠습니까?")){
 			return true;
 		} else {return false;}	
-	}
+	}	
 </script>
 </head>
 <body>
@@ -37,8 +40,13 @@
 			<ul class="lst_tour">
 				<c:forEach var="list" items="${wishList }">
 					<li class="left">
-						<img src="" alt="좋아요 하트이미지">
-						<a class="" href="">
+						<c:if test="${list.heart>0 }">
+							<img src="" alt="빨강하트" id='heart' onclick="location.href='delLikeItPro.do?gServNo=${list.gServNo}'">						
+						</c:if>
+						<c:if test="${list.heart==0 }">
+							<img src="" alt="하양하트" id='heart' onclick="location.href='writeLikeItPro.do?gServNo=${list.gServNo}'">						
+						</c:if>
+						<a class="" href="tour_detail.do?gServNo=${list.gServNo }">
 							<img src="${list.imgSrc }" alt="상품 이미지">
 						</a>
 						<span class="author">
@@ -50,7 +58,7 @@
 							</strong>
 						</span>
 						<p>
-							<strong><a class="call_tour" href="">${list.gServTitle }</a></strong><br>
+							<strong><a href="tour_detail.do?gServNo=${list.gServNo }">${list.gServTitle }</a></strong><br>
 							${list.gServSub }
 						</p>
 						<p>
@@ -62,7 +70,7 @@
 							<div class="left">${list.remainSize }</div>
 						</div>
 						<br>
-							<input type="button" value="예약하기" onclick="location.href='resevForm.do?gServNo=${list.gServNo }'">
+							<input type="button" value="예약하기" onclick="location.href='tour_detail.do?gServNo=${list.gServNo }'">
 						  <form class="left" action="delWishList.do" onsubmit="return chk()">
 						  	<input type="hidden" name="gServNo" value="${list.gServNo }">						  
 							<input type="submit" value="위시리스트 삭제">

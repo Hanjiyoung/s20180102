@@ -1,6 +1,9 @@
 package oracle.java.s20180102.controller;
 
 
+import oracle.java.s20180102.model.ContentsDto;
+import oracle.java.s20180102.model.GServDto;
+import oracle.java.s20180102.model.LikeItDto;
 import oracle.java.s20180102.model.MemberDto;
 import oracle.java.s20180102.model.PagingDto;
 import oracle.java.s20180102.model.PayDto;
@@ -9,6 +12,7 @@ import oracle.java.s20180102.model.ReviewDto;
 import oracle.java.s20180102.model.TourCardDto;
 import oracle.java.s20180102.model.WishDto;
 import oracle.java.s20180102.service.GServService;
+import oracle.java.s20180102.service.LikeItService;
 import oracle.java.s20180102.service.MemberService;
 import oracle.java.s20180102.service.Paging;
 import oracle.java.s20180102.service.PayService;
@@ -16,7 +20,7 @@ import oracle.java.s20180102.service.ReservService;
 import oracle.java.s20180102.service.ReviewService;
 import oracle.java.s20180102.service.WishService;
 
-import java.util.Enumeration;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
@@ -37,6 +41,8 @@ public class MemberController {
 	@Autowired
 	private WishService ws;
 	@Autowired
+	private LikeItService lis;
+	@Autowired
 	private ReservService ress;
 	@Autowired
 	private MemberService mbs;
@@ -44,7 +50,41 @@ public class MemberController {
 	private PayService ps;
 	@Autowired
 	private ReviewService revs;
+	@Autowired
+	private GServService gss;
 	
+	@RequestMapping(value="tour_detail")
+	public String tour_detail(int gServNo, HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		
+		GServDto gsDto = gss.oneGServ(gServNo);
+		List<ContentsDto> cDtoList = gss.selCont(gServNo);
+		
+		WishDto wdto = new WishDto();
+		wdto.setgServNo(gServNo);
+		wdto.setMemberId(ID);
+		int wishCheck = ws.wishCheck(wdto);
+		
+		model.addAttribute("wishCheck", wishCheck);
+		model.addAttribute("gsDto", gsDto);
+		model.addAttribute("cDtoList", cDtoList);
+		return "tour_detail";
+	}
+	
+	@RequestMapping(value = "inWishList", produces = "application/text;charset=UTF-8")
+	@ResponseBody
+	public String inWishList(HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		int gServNo = Integer.parseInt(request.getParameter("gServNo"));
+		WishDto wsDto = new WishDto();
+		wsDto.setMemberId(ID);
+		wsDto.setgServNo(gServNo);
+		ws.inWishList(wsDto);
+		
+		return "위시리스트에 등록된 상품입니다.";
+	}
 	@RequestMapping(value="wishList")
 	public String wishList(HttpServletRequest request, Model model) {
 		//String ID =  (String) request.getSession().getAttribute("ID");
@@ -58,7 +98,6 @@ public class MemberController {
 		pdto.setStart(pg.getStart());
 		pdto.setEnd(pg.getEnd());
 		List<TourCardDto> wishList = ws.selWishList(pdto);
-		
 		model.addAttribute("id", ID);
 		model.addAttribute("wishList", wishList);
 		return "wishList";
@@ -89,6 +128,58 @@ public class MemberController {
 		return "wishList";
 	}
 	
+	@RequestMapping(value="writeLikeItPro")
+	public String writeLikeItPro(HttpServletRequest request, Model model) {
+		int gServNo = Integer.parseInt(request.getParameter("gServNo"));
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		LikeItDto liDto = new LikeItDto();
+		liDto.setMemberId(ID);
+		liDto.setgServNo(gServNo);
+		lis.inLikeIt(liDto);
+		
+		
+		String currentPage = request.getParameter("currentPage");
+		PagingDto pdto = new PagingDto();
+	
+		int total = ws.totalWish(ID);
+		Paging pg = new Paging(total, currentPage, 8);
+		pdto.setMemberId(ID);
+		pdto.setStart(pg.getStart());
+		pdto.setEnd(pg.getEnd());
+		List<TourCardDto> wishList = ws.selWishList(pdto);
+		model.addAttribute("id", ID);
+		model.addAttribute("wishList", wishList);
+		
+		return "wishList";
+	}
+	
+	@RequestMapping(value="delLikeItPro")
+	public String delLikeItPro(HttpServletRequest request, Model model) {
+		int gServNo = Integer.parseInt(request.getParameter("gServNo"));
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		LikeItDto liDto = new LikeItDto();
+		liDto.setMemberId(ID);
+		liDto.setgServNo(gServNo);
+		lis.delLikeIt(liDto);
+		
+		String currentPage = request.getParameter("currentPage");
+		PagingDto pdto = new PagingDto();
+	
+		int total = ws.totalWish(ID);
+		Paging pg = new Paging(total, currentPage, 8);
+		pdto.setMemberId(ID);
+		pdto.setStart(pg.getStart());
+		pdto.setEnd(pg.getEnd());
+		List<TourCardDto> wishList = ws.selWishList(pdto);
+		model.addAttribute("id", ID);
+		model.addAttribute("wishList", wishList);
+		
+		return "wishList";
+	}
+	
+	
 	@RequestMapping(value="reservation_member")
 	public String reservation_member(HttpServletRequest request, Model model) {
 		//String ID =  (String) request.getSession().getAttribute("ID");
@@ -108,6 +199,8 @@ public class MemberController {
 
 		return "reservation_member";
 	}
+	
+	
 	
 	@RequestMapping(value="delResvPro")
 	public String resvCancle(HttpServletRequest request, Model model) {
@@ -133,6 +226,48 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value="insertResvPro")
+	public String insertResvPro(ReservDto resvDto, HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		int p1 = (int)(Math.random()*100000);
+		int p2 = (int)(Math.random()*100000);
+		String payCode = "P_" + p1 + "_" + p2;
+		resvDto.setMemberId(ID);
+		resvDto.setPayCode(payCode);
+		ress.inResv(resvDto);
+		resvDto = ress.oneResv(payCode);
+		TourCardDto tcDto = gss.oneTourCard(resvDto);
+		model.addAttribute("resvDto", resvDto);
+		model.addAttribute("tcDto", tcDto);
+		return "insertResvPro";
+	}
+	
+	@RequestMapping(value="upResvForm")
+	public String upResvForm(HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		String payCode = request.getParameter("payCode");
+		ReservDto resvDto = ress.oneResv(payCode);
+		TourCardDto tcDto = gss.oneTourCard(resvDto);
+		model.addAttribute("resvDto", resvDto);
+		model.addAttribute("tcDto", tcDto);
+		return "upResvForm";
+	}
+	
+	@RequestMapping(value="upResvPro")
+	public String upResvPro(ReservDto resvDto, Model model) {
+		int reMemSize = resvDto.getReMemSize();
+		Date tourDate = resvDto.getTourDate();
+		resvDto = ress.oneResv(resvDto.getPayCode());
+		resvDto.setReMemSize(reMemSize);
+		resvDto.setTourDate(tourDate);
+		ress.upResv(resvDto);
+		
+		System.out.println("머야??");
+		
+		return "redirect:reservation_member.do";
+	}
 	
 	@RequestMapping(value="selPayForm")
 	public String payPage(HttpServletRequest request, Model model) {
@@ -140,9 +275,12 @@ public class MemberController {
 		String payCode = request.getParameter("payCode");
 		String ID =  "abcd@naver.com";
 		ReservDto rsvDto = ress.oneResv(payCode);
+		TourCardDto tcDto = gss.oneTourCard(rsvDto);
 		MemberDto mbDto = mbs.selMember(ID);
-		model.addAttribute("rsvDto", rsvDto);
+		
+		model.addAttribute("resvDto", rsvDto);
 		model.addAttribute("mbDto", mbDto);
+		model.addAttribute("tcDto", tcDto);
 		return "selPayForm";
 	}
 	
@@ -256,13 +394,53 @@ public class MemberController {
 	
 	@RequestMapping(value="updateReviewPro")
 	public String updateReviewPro(ReviewDto revDto, HttpServletRequest request, Model model) {
-		
-		
 		revs.upReview(revDto);
-		
+		return "redirect:review_member.do";
+	}
+	
+	@RequestMapping(value="delReviewPro")
+	public String delReviewPro(HttpServletRequest request, Model model) {
 		//String ID =  (String) request.getSession().getAttribute("ID");
-		String currentPage = request.getParameter("currentPage");
+		String ID = "abcd@naver.com";
+		int gServNo = Integer.parseInt(request.getParameter("gServNo"));
+		ReviewDto revDto = new ReviewDto();
+		revDto.setgServNo(gServNo);
+        revDto.setMemberId(ID);
+		revDto = revs.oneReview(revDto);
+		revs.delReview(revDto);
+		
+		model.addAttribute("gServNo", gServNo);
+		return "redirect:review_member.do";
+	}
+	
+	@RequestMapping(value="delCmtPro")
+	public String delCmtPro(HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID = "abcd@naver.com";
+		int gServNo = Integer.parseInt(request.getParameter("gServNo"));
+		int rStep = Integer.parseInt(request.getParameter("rStep"));
+		ReviewDto revDto = new ReviewDto();
+		revDto.setgServNo(gServNo);
+        revDto.setMemberId(ID);
+		revDto = revs.oneReview(revDto);
+		revDto.setrStep(rStep);
+		revs.delComment(revDto);
+		
+		model.addAttribute("gServNo", gServNo);
+		return "redirect:getReviewPro.do";
+	}
+	
+	@RequestMapping(value="getReviewPro")
+	public String getReviewPro(int gServNo, HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
 		String ID =  "abcd@naver.com";
+		ReviewDto revDto = new ReviewDto();
+		revDto.setgServNo(gServNo);
+		revDto.setMemberId(ID);
+		revDto = revs.oneReview(revDto);
+		List<ReviewDto> revDtoList = revs.oneReviewList(revDto);
+				
+		String currentPage = request.getParameter("currentPage");
 		PagingDto pdto = new PagingDto();
 		int total = ress.total_Complete(ID);
 		Paging pg = new Paging(total, currentPage);
@@ -270,12 +448,26 @@ public class MemberController {
 		pdto.setStart(pg.getStart());
 		pdto.setEnd(pg.getEnd());
 		List<ReservDto> complete = ress.completeList(pdto);
-		
+					
 		model.addAttribute("list", complete);
 		model.addAttribute("pg", pg);
 		model.addAttribute("total",total);
 		
+		model.addAttribute("revDto",revDto);
+		model.addAttribute("revList", revDtoList);
+		model.addAttribute("getReview", 1);
 		return "review_member";
+	}
+	
+	@RequestMapping(value="writeCommentPro")
+	public String writeCommentPro(ReviewDto revDto, HttpServletRequest request, Model model) {
+		//String ID =  (String) request.getSession().getAttribute("ID");
+		String ID =  "abcd@naver.com";
+		revDto.setMemberId(ID);
+		System.out.println(revDto.getgServNo());
+		revs.inComment(revDto);
+		model.addAttribute("gServNo", revDto.getgServNo());
+		return "redirect:getReviewPro.do";
 	}
 	
 /*-----------------------------------------------------------------------------------------

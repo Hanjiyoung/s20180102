@@ -45,4 +45,14 @@ public class ReservDaoImpl implements ReservDao {
 		session.update("resvCancel", payCode);		
 	}
 
+	@Override
+	public void inResv(ReservDto resvDto) {
+		session.insert("inResv", resvDto);
+	}
+
+	@Override
+	public void upResv(ReservDto resvDto) {
+		session.update("upResv", resvDto);
+	}
+
 }

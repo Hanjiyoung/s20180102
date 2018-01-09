@@ -44,6 +44,7 @@
 <form action="updateReviewPro.do">
 	<input type="hidden" name="memberId" value="${revDto.memberId }">
 	<input type="hidden" name="gServNo" value="${revDto.gServNo }">	
+	<input type="hidden" name="rGroup" value="${revDto.rGroup }">	
 	<table>
 		<caption>
 		   [ ${revDto.gServTitle } ] 후기 수정
@@ -77,7 +78,7 @@
 		</tr>
 		<tr>
 			<td><input type="submit" value="후기 수정"></td>
-			<td><input type="button" value="취소"></td>
+			<td><input type="button" value="취소" onclick="location.href='review_member.do'"></td>
 		</tr>
 	</table>
 </form>

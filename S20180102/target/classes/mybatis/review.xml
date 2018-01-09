@@ -18,8 +18,7 @@
     <result property="rCredate" column="rCredate"/>
     <result property="gServTitle" column="gServTitle"/>
   </resultMap>
-  
-  
+    
    <insert id="inReview" parameterType="ReviewDto">
    		  insert into review values (
    		  		'${memberId}', ${gServNo}, '${nickName}', '${rTitle}',
@@ -33,14 +32,45 @@
    		    where memberId='${memberId}'
    			  and rev.gServNo=${gServNo}
    			  and rev.gServNo = gs.gServNo
+   			  and rev.rstep=0
    </select>
-   
+      
+  <select id="oneReviewList" parameterType="ReviewDto" resultMap="RevResult">
+  		   Select * 
+  		    From review 
+  		    Where gServNo=${gServNo} 
+  		      and rGroup=${rGroup} 
+  		      and rStep != 0
+  		    Order by rStep
+  </select>
+  
    <update id="upReview" parameterType="ReviewDto">
    		update review
    		   set rTitle ='${rTitle}', rContent='${rContent}', rImg ='${rImg}',
-   		       rStar  ='${rStar}', rHit=0, rGroup=review_seq.nextval, 
+   		       rStar  =${rStar}, rHit=0, rGroup=${rGroup}, 
    		       rStep=0, rIndent=0, rCredate=sysdate 
-   		 where memberId='${memberId}' and gServNo=${gServNo}
+   		 where memberId='${memberId}' 
+   		   and gServNo=${gServNo}
+   		   and rStep=0
    </update>
+  
+   <insert id="inComment" parameterType="ReviewDto">
+   		insert into review values (
+   		  		'${memberId}', ${gServNo}, '${nickName}', '',
+   		  		'${rContent}', '', 0, 0, ${rGroup},
+   		  		(select Max(rStep)+1 from review where gServNo=${gServNo}), 0, sysdate)
+   </insert>
    
+   <delete id="delReview" parameterType="ReviewDto">
+   		Delete review 
+   		 Where rGroup  = ${rGroup} 
+   		   and gServNo = ${gServNo}
+   </delete>
+   
+   <delete id="delComment" parameterType="ReviewDto">
+   		Delete review
+   		 Where rGroup  = ${rGroup}
+   		   and gServNo = ${gServNo}
+   		   and rStep   = ${rStep} 
+   </delete>
 </mapper>

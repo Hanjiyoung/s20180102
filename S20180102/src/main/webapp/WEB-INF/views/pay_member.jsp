@@ -32,7 +32,7 @@
 			<c:forEach var="list" items="${payList}">
 				<tr>
 					<td>${list.payCode }</td>
-					<td><a href="detail_tour.do?gServNo=${list.gServNo }">${list.gServTitle }</a></td>
+					<td><a href="tour_detail.do?gServNo=${list.gServNo }">${list.gServTitle }</a></td>
 					<td>${list.tourDate }</td>
 					<td>${list.amount }</td>
 					<td>결제완료(${list.pay_method })</td>

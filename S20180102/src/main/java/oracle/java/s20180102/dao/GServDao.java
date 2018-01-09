@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import oracle.java.s20180102.model.ContentsDto;
 import oracle.java.s20180102.model.GServDto;
+import oracle.java.s20180102.model.ReservDto;
+import oracle.java.s20180102.model.TourCardDto;
 
 public interface GServDao {
 	List<GServDto> selGServ(GServDto gsDto);                              // 전체 상품 조회
@@ -17,5 +19,6 @@ public interface GServDao {
 	int total();
 	int total(int gNo);
 	GServDto oneGServ(int gServNo);
-	List<ContentsDto> selCont(int gServNo);
+	List<ContentsDto> selCont(int gServNo);                  
+	TourCardDto oneTourCard(ReservDto resvDto);               // 하나의 투어카드 선택
 }

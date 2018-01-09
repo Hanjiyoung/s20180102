@@ -30,5 +30,18 @@ public class WishDaoImpl implements WishDao{
 	public void delWishList(WishDto wdto) {
 		session.delete("delWishList",wdto);
 	}
+
+	@Override
+	public void inWishList(WishDto wDto) {
+		session.insert("inWishList",wDto);
+	}
+
+	@Override
+	public int wishCheck(WishDto wdto) {
+		return session.selectOne("wishCheck", wdto);
+	}
+
+	
+
 	
 }

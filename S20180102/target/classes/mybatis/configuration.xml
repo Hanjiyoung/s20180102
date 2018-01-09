@@ -9,9 +9,10 @@
 		<typeAlias alias="PayDto"       type="oracle.java.s20180102.model.PayDto" />
 		<typeAlias alias="TourCardDto"  type="oracle.java.s20180102.model.TourCardDto" />
 		<typeAlias alias="GServDto"     type="oracle.java.s20180102.model.GServDto" />
-		<typeAlias alias="WishDto"     type="oracle.java.s20180102.model.WishDto" />		
-		<typeAlias alias="ReviewDto"     type="oracle.java.s20180102.model.ReviewDto" />		
-		<typeAlias alias="ContentsDto"     type="oracle.java.s20180102.model.ContentsDto" />		
+		<typeAlias alias="WishDto"      type="oracle.java.s20180102.model.WishDto" />		
+		<typeAlias alias="ReviewDto"    type="oracle.java.s20180102.model.ReviewDto" />		
+		<typeAlias alias="ContentsDto"  type="oracle.java.s20180102.model.ContentsDto" />		
+		<typeAlias alias="LikeItDto"    type="oracle.java.s20180102.model.LikeItDto" />		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/gService.xml" />
@@ -21,5 +22,6 @@
 		<mapper resource="mybatis/wishList.xml" /> 
 		<mapper resource="mybatis/review.xml" /> 
 		<mapper resource="mybatis/contents.xml" /> 
+		<mapper resource="mybatis/likeIt.xml" /> 
 	</mappers>
 </configuration>

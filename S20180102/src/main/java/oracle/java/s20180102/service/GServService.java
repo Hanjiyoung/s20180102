@@ -5,10 +5,12 @@ import java.util.List;
 
 import oracle.java.s20180102.model.ContentsDto;
 import oracle.java.s20180102.model.GServDto;
+import oracle.java.s20180102.model.ReservDto;
+import oracle.java.s20180102.model.TourCardDto;
 
 
 public interface GServService {
-	List<GServDto> selGServ(GServDto gsDto);                              // 전체 상품 조회
+	List<GServDto> selGServ(GServDto gsDto);                  // 전체 상품 조회
 	int total();											  // 총 상품수
 	int total(int gNo); 									  // 가이드별 상품수
 	GServDto oneGServ(int gServNo);                        	  // 1개의 서비스 검색, 리턴;
@@ -19,5 +21,14 @@ public interface GServService {
 	//int upGServ(GServDto gServDto);                         // 상품 수정
 	//int delGServ(String[] GservNo);                         // 상품 일괄 삭제
 	
+	
+	
+	
+	// 지영------------------------------------------------------------------------
+	TourCardDto oneTourCard(ReservDto resvDto);          // 하나의 투어카드 조회
+	
+	
+	
+	//-----------------------------------------------------------------------------
 	
 }

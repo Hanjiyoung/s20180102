@@ -36,6 +36,26 @@ public class ReviewServiceImpl implements ReviewService{
 		revDao.upReview(revDto);
 	}
 
+	@Override
+	public List<ReviewDto> oneReviewList(ReviewDto revDto) {
+		return revDao.oneReviewList(revDto);
+	}
+
+	@Override
+	public void inComment(ReviewDto revDto) {
+		revDao.inComment(revDto);
+	}
+
+	@Override
+	public void delReview(ReviewDto revDto) {
+		revDao.delReview(revDto);
+	}
+
+	@Override
+	public void delComment(ReviewDto revDto) {
+		revDao.delComment(revDto);
+	}
+
 
 
 	

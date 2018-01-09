@@ -7,16 +7,17 @@
 </head>
 <body> 
 <%
- //response.sendRedirect("wishList.do");     
- //response.sendRedirect("reservation_member.do");
- //response.sendRedirect("review_member.do");
- //response.sendRedirect("pay_member.do");
+ //------ 지영 -----------------
+ //response.sendRedirect("wishList.do");                             // 위시리스트
+ //response.sendRedirect("reservation_member.do");                   // 예약관리
+ //response.sendRedirect("pay_member.do");                           // 결제관리
+ response.sendRedirect("review_member.do");                        // 후기관리
  
  
- //------태욱 -----------------
+ //------ 태욱 -----------------
  
-    response.sendRedirect("service_guide.do?gNo=10001");     // 예시
-  //response.sendRedirect("selGServForm.do?gServNo=10001001");     // 예시
+  //response.sendRedirect("service_guide.do?gNo=10001");           // 가이드 상품관리
+  //response.sendRedirect("selGServForm.do?gServNo=10001001");     // 상품 수정 form
  
  //---------------------------
 %>

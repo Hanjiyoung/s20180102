@@ -51,6 +51,16 @@ public class ReservServiceImpl implements ReservService{
 		resDao.resvCancel(payCode);
 	}
 
+	@Override
+	public void inResv(ReservDto resvDto) {
+		resDao.inResv(resvDto);
+	}
+
+	@Override
+	public void upResv(ReservDto resvDto) {
+		resDao.upResv(resvDto);
+	}
+
 
 	
 }

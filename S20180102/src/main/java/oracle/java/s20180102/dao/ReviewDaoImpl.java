@@ -31,6 +31,27 @@ public class ReviewDaoImpl implements ReviewDao {
 		session.update("upReview", revDto);
 	}
 
+	@Override
+	public List<ReviewDto> oneReviewList(ReviewDto revDto) {
+		System.out.println();
+		return session.selectList("oneReviewList", revDto);
+	}
+
+	@Override
+	public void inComment(ReviewDto revDto) {
+		session.insert("inComment", revDto);
+	}
+
+	@Override
+	public void delReview(ReviewDto revDto) {
+		session.delete("delReview", revDto);
+	}
+
+	@Override
+	public void delComment(ReviewDto revDto) {
+		session.delete("delComment", revDto);
+	}
+
 	
 
 }

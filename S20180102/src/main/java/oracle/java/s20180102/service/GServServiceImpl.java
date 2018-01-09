@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import oracle.java.s20180102.dao.GServDao;
 import oracle.java.s20180102.model.ContentsDto;
 import oracle.java.s20180102.model.GServDto;
+import oracle.java.s20180102.model.ReservDto;
+import oracle.java.s20180102.model.TourCardDto;
 
 @Service
 public class GServServiceImpl implements GServService{
@@ -34,6 +36,11 @@ public class GServServiceImpl implements GServService{
 	@Override
 	public List<ContentsDto> selCont(int gServNo) {
 		return gsDao.selCont(gServNo);
+	}
+
+	@Override
+	public TourCardDto oneTourCard(ReservDto resvDto) {
+		return gsDao.oneTourCard(resvDto);
 	}
 	
 }

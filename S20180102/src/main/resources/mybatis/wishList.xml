@@ -15,34 +15,46 @@
 		<result property="remainSize" column="remainSize" />
 		<result property="gServNo" column="gServNo" />
 		<result property="gServPrice" column="gServPrice" />
+		<result property="heart" column="heart" />
 	</resultMap>
 
 
 	<select id="selWishList" parameterType="PagingDto" resultMap="tcResult">
 		select * from 
-			  (  Select rownum rn, sv.gservno, sv.gServtitle, cs.itemname gServSub, sv.gServLeadtime, sv.gServPrice, lk.cnt likeIt, ct.imgSrc, gd.gImg, mb.nickname, (sv.memsizemax-NVL(rv.cnt,0)) remainSize
+			  (  Select rownum rn, sv.gno, sv.gservno, sv.gServtitle, cs.itemname gServSub, sv.gServPrice, Decode(lt.gServNo,sv.gServNo,'1','0') heart,
+			            sv.gServLeadtime, lk.cnt likeit, ct.imgSrc, gd.gImg, mb.nickname, (sv.memsizemax-NVL(rv.cnt,0)) remainSize
 			     From     gService sv 
 			          ,   codeset  cs
 			          ,   contents ct
 			          ,   guide    gd
 			          ,   member   mb
+			          , ( select distinct gServNo from likeit
+			           ) le
+			          , ( select gServNo from likeit where memberID = '${memberId}'
+			              group by gServNo 
+			           ) lt
 			          , ( select gServno, count(*) cnt from likeit
 			              group by gServno
 			           ) lk
-			           , ( select gServno, count(*) cnt from reservation 
+			          , ( select gServno, count(*) cnt 
+			                from reservation
+			               where cancel_yn='n' 
 			               group by gServno
 			           ) rv 
 			      Where  sv.gServsub = cs.itemcode(+)
 			       and   sv.gServno  = lk.gServno(+) 
 			       and   sv.gServno = ct.gServno(+)
+			       and   sv.gServNo = lt.gServNO(+)
 			       and   cs.DIVCODE = '02'
 			       and   ct.GSERVORDER = '1'
 			       and   sv.gno = gd.gno(+)
+			       and   sv.gServNo = le.gServNo(+)
 			       and   sv.gServno = rv.gServno(+)
 			       and   mb.memberId = gd.memberId
 			       and   sv.gServno in (select gServno from wishlist where memberId='${memberId}')
-   				)    
-	   where rn between ${start} and ${end}   
+			     Order by sv.gServTitle
+			   )    
+		 where rn between ${start} and ${end} 
 	</select>
    
    <select id="totalWish" parameterType="java.lang.String" resultType="int">
@@ -52,5 +64,16 @@
 	<delete id="delWishList" parameterType="WishDto">
 		delete wishList where memberId='${memberId}'and gServNo = ${gServNo}
 	</delete>
+	
+	<insert id="inWishList" parameterType="WishDto">
+		insert into wishList values ('${memberId}', ${gServNo})
+	</insert>
+	
+	<select id="wishCheck" parameterType="WishDto" resultType="int">
+		select count(*) 
+		  from wishList 
+		 where memberId='${memberId}'
+		   and gServNo=${gServNo}
+	</select>
 	
 </mapper>
