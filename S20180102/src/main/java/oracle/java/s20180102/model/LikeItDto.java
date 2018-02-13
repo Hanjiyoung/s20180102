@@ -2,7 +2,7 @@ package oracle.java.s20180102.model;
 
 public class LikeItDto {
 	private String memberId;
-	private int gServNo;
+	private int gservNo;
 	
 	public String getMemberId() {
 		return memberId;
@@ -10,12 +10,13 @@ public class LikeItDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getgServNo() {
-		return gServNo;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
+
 	
 	
 }

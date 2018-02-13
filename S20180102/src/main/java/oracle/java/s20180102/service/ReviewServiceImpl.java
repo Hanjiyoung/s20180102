@@ -2,19 +2,13 @@ package oracle.java.s20180102.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;  // 
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import oracle.java.s20180102.dao.ReviewDao;
-import oracle.java.s20180102.dao.WishDao;
-import oracle.java.s20180102.model.GServDto;
 import oracle.java.s20180102.model.PagingDto;
-import oracle.java.s20180102.model.PayDto;
 import oracle.java.s20180102.model.ReviewDto;
-import oracle.java.s20180102.model.TourCardDto;
-import oracle.java.s20180102.model.WishDto;
+
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -55,6 +49,57 @@ public class ReviewServiceImpl implements ReviewService{
 	public void delComment(ReviewDto revDto) {
 		revDao.delComment(revDto);
 	}
+
+	@Override
+	public int total_Complete(ReviewDto reviewDto) {
+		return revDao.total_Complete(reviewDto);
+	}
+
+	/*@Override
+	public List<ReviewDto> selReviewList(ReviewDto reviewDto) {
+		return revDao.selReviewList(reviewDto);
+	}*/
+
+	@Override
+	public int totalReview() {
+		return revDao.totalReview();
+	}
+
+	@Override
+	public List<ReviewDto> selReviewList(PagingDto pDto) {
+		return revDao.selReviewList(pDto);
+	}
+
+	@Override
+	public int totalRevsGno(int gno) {
+		return revDao.totalRevsGno(gno);
+	}
+
+	@Override
+	public List<ReviewDto> selgnoReviewList(PagingDto pDto) {
+		return revDao.selgnoReviewList(pDto);
+	}
+
+	@Override
+	public int totalGservNoRevs(int gservNo) {
+		return revDao.totalGservNoRevs(gservNo);
+	}
+
+	@Override
+	public List<ReviewDto> selGsevNoList(PagingDto pdto) {
+		return revDao.selGsevNoList(pdto);
+	}
+
+	@Override
+	public int total_CompleteM(String searchKey) {
+		return revDao.total_CompleteM(searchKey);
+	}
+
+	@Override
+	public List<ReviewDto> completeListM(String searchKey) {
+		return revDao.completeListM(searchKey);
+	}
+
 
 
 

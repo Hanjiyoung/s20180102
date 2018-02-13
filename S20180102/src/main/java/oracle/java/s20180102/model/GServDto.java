@@ -3,29 +3,30 @@ package oracle.java.s20180102.model;
 import java.sql.Date;
 
 public class GServDto {
-	private int gNo;
-	private int gServNo;
-	private String gServTitle;
-	private String gServGps;
-	private String gServLeadTime;
-	private String gServSub;
-	private String gServArea;
-	private int gServPrice;
+	private int gno;
+	private int gservNo;
+	private String gservTitle;
+	private String gservGps;
+	private String gservLeadTime;
+	private String gservSub;
+	private String gservArea;
+	private int gservPrice;
 	private int memSizeMin;
 	private int memSizeMax;
-	private String gServLang;
+	private String gservLang;
 	private String pickUpLoc;
 	private String pickUpTime;
 	private String servTag;
-	private String pInclude;
+	private String pinclude;
 	private String notPInclude;
 	private String caution;
-	private String gServSDate;
-	private String gServEDate;
-	private String gServDay;
-	private Date gServCreDate;
-	private Date gServFixDate;
-	private String gServLock;
+	private String gservSDate;
+	private String gservEDate;
+	private String gservDay;
+	private Date gservCreDate;
+	private Date gservFixDate;
+	private String gservLock;
+	private String mainView;
 	
 	// 추가 항목
 	
@@ -33,11 +34,49 @@ public class GServDto {
 	private int end;
 	private String subName;
 	private String areaName;
-	
+	private int reMemSize;
+	private Date tourDate;
+	private String endTime;
+	private String startSearch;
+	private String endSearch;
 	//
+	
 	
 	public String getSubName() {
 		return subName;
+	}
+	
+	public String getMainView() {
+		return mainView;
+	}
+
+	public void setMainView(String mainView) {
+		this.mainView = mainView;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getEndSearch() {
+		return endSearch;
+	}
+	public void setEndSearch(String endSearch) {
+		this.endSearch = endSearch;
+	}
+	public Date getTourDate() {
+		return tourDate;
+	}	
+	public int getReMemSize() {
+		return reMemSize;
+	}
+	public void setReMemSize(int reMemSize) {
+		this.reMemSize = reMemSize;
+	}
+	public void setTourDate(Date tourDate) {
+		this.tourDate = tourDate;
 	}
 	public void setSubName(String subName) {
 		this.subName = subName;
@@ -47,9 +86,7 @@ public class GServDto {
 	}
 	public void setAreaName(String areaName) {
 		this.areaName = areaName;
-	}
-	
-	
+	}	
 	public int getStart() {
 		return start;
 	}
@@ -62,53 +99,59 @@ public class GServDto {
 	public void setEnd(int end) {
 		this.end = end;
 	}
-	public int getgNo() {
-		return gNo;
+	public String getStartSearch() {
+		return startSearch;
 	}
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
+	public void setStartSearch(String startSearch) {
+		this.startSearch = startSearch;
 	}
-	public int getgServNo() {
-		return gServNo;
+	public int getGno() {
+		return gno;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
+	public void setGno(int gno) {
+		this.gno = gno;
 	}
-	public String getgServTitle() {
-		return gServTitle;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServTitle(String gServTitle) {
-		this.gServTitle = gServTitle;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
-	public String getgServGps() {
-		return gServGps;
+	public String getGservTitle() {
+		return gservTitle;
 	}
-	public void setgServGps(String gServGps) {
-		this.gServGps = gServGps;
+	public void setGservTitle(String gservTitle) {
+		this.gservTitle = gservTitle;
 	}
-	public String getgServLeadTime() {
-		return gServLeadTime;
+	public String getGservGps() {
+		return gservGps;
 	}
-	public void setgServLeadTime(String gServLeadTime) {
-		this.gServLeadTime = gServLeadTime;
+	public void setGservGps(String gservGps) {
+		this.gservGps = gservGps;
 	}
-	public String getgServSub() {
-		return gServSub;
+	public String getGservLeadTime() {
+		return gservLeadTime;
 	}
-	public void setgServSub(String gServSub) {
-		this.gServSub = gServSub;
+	public void setGservLeadTime(String gservLeadTime) {
+		this.gservLeadTime = gservLeadTime;
 	}
-	public String getgServArea() {
-		return gServArea;
+	public String getGservSub() {
+		return gservSub;
 	}
-	public void setgServArea(String gServArea) {
-		this.gServArea = gServArea;
+	public void setGservSub(String gservSub) {
+		this.gservSub = gservSub;
 	}
-	public int getgServPrice() {
-		return gServPrice;
+	public String getGservArea() {
+		return gservArea;
 	}
-	public void setgServPrice(int gServPrice) {
-		this.gServPrice = gServPrice;
+	public void setGservArea(String gservArea) {
+		this.gservArea = gservArea;
+	}
+	public int getGservPrice() {
+		return gservPrice;
+	}
+	public void setGservPrice(int gservPrice) {
+		this.gservPrice = gservPrice;
 	}
 	public int getMemSizeMin() {
 		return memSizeMin;
@@ -122,11 +165,11 @@ public class GServDto {
 	public void setMemSizeMax(int memSizeMax) {
 		this.memSizeMax = memSizeMax;
 	}
-	public String getgServLang() {
-		return gServLang;
+	public String getGservLang() {
+		return gservLang;
 	}
-	public void setgServLang(String gServLang) {
-		this.gServLang = gServLang;
+	public void setGservLang(String gservLang) {
+		this.gservLang = gservLang;
 	}
 	public String getPickUpLoc() {
 		return pickUpLoc;
@@ -146,11 +189,11 @@ public class GServDto {
 	public void setServTag(String servTag) {
 		this.servTag = servTag;
 	}
-	public String getpInclude() {
-		return pInclude;
+	public String getPinclude() {
+		return pinclude;
 	}
-	public void setpInclude(String pInclude) {
-		this.pInclude = pInclude;
+	public void setPinclude(String pinclude) {
+		this.pinclude = pinclude;
 	}
 	public String getNotPInclude() {
 		return notPInclude;
@@ -164,42 +207,43 @@ public class GServDto {
 	public void setCaution(String caution) {
 		this.caution = caution;
 	}
-	public String getgServSDate() {
-		return gServSDate;
+	public String getGservSDate() {
+		return gservSDate;
 	}
-	public void setgServSDate(String gServSDate) {
-		this.gServSDate = gServSDate;
+	public void setGservSDate(String gservSDate) {
+		this.gservSDate = gservSDate;
 	}
-	public String getgServEDate() {
-		return gServEDate;
+	public String getGservEDate() {
+		return gservEDate;
 	}
-	public void setgServEDate(String gServEDate) {
-		this.gServEDate = gServEDate;
+	public void setGservEDate(String gservEDate) {
+		this.gservEDate = gservEDate;
 	}
-	public String getgServDay() {
-		return gServDay;
+	public String getGservDay() {
+		return gservDay;
 	}
-	public void setgServDay(String gServDay) {
-		this.gServDay = gServDay;
+	public void setGservDay(String gservDay) {
+		this.gservDay = gservDay;
 	}
-	public Date getgServCreDate() {
-		return gServCreDate;
+	public Date getGservCreDate() {
+		return gservCreDate;
 	}
-	public void setgServCreDate(Date gServCreDate) {
-		this.gServCreDate = gServCreDate;
+	public void setGservCreDate(Date gservCreDate) {
+		this.gservCreDate = gservCreDate;
 	}
-	public Date getgServFixDate() {
-		return gServFixDate;
+	public Date getGservFixDate() {
+		return gservFixDate;
 	}
-	public void setgServFixDate(Date gServFixDate) {
-		this.gServFixDate = gServFixDate;
+	public void setGservFixDate(Date gservFixDate) {
+		this.gservFixDate = gservFixDate;
 	}
-	public String getgServLock() {
-		return gServLock;
+	public String getGservLock() {
+		return gservLock;
 	}
-	public void setgServLock(String gServLock) {
-		this.gServLock = gServLock;
+	public void setGservLock(String gservLock) {
+		this.gservLock = gservLock;
 	}
-	
+
+  
 	
 }

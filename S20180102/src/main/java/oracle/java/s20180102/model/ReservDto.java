@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class ReservDto {
 	private String memberId;
-	private int gServNo;
-	private int gNo;
+	private int gservNo;
+	private int gno;
 	private String payCode;
 	private Date reservDate;
 	private Date tourDate;
@@ -19,21 +19,37 @@ public class ReservDto {
 	//------------------
 	//    지영 추가
 	
-	private String gServTitle;
+	private String gservTitle;
 	private String amount;
 	private int rvNum;
+	private int openReview;
+	private int rn;
+	//---------------------
 	
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
+	public int getOpenReview() {
+		return openReview;
+	}
+	public void setOpenReview(int openReview) {
+		this.openReview = openReview;
+	}
 	public String getAmount() {
 		return amount;
 	}
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	public String getgServTitle() {
-		return gServTitle;
+
+	public String getGservTitle() {
+		return gservTitle;
 	}
-	public void setgServTitle(String gServTitle) {
-		this.gServTitle = gServTitle;
+	public void setGservTitle(String gservTitle) {
+		this.gservTitle = gservTitle;
 	}
 	public int getRvNum() {
 		return rvNum;
@@ -47,21 +63,20 @@ public class ReservDto {
 	public String getMemberId() {
 		return memberId;
 	}
-
+	public int getGno() {
+		return gno;
+	}
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getgServNo() {
-		return gServNo;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
-	}
-	public int getgNo() {
-		return gNo;
-	}
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
 	public String getPayCode() {
 		return payCode;

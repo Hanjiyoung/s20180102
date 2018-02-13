@@ -2,17 +2,16 @@ package oracle.java.s20180102.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+
 import org.springframework.beans.factory.annotation.Autowired;  // 
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import oracle.java.s20180102.dao.ReservDao;
-import oracle.java.s20180102.dao.WishDao;
-import oracle.java.s20180102.model.GServDto;
+
 import oracle.java.s20180102.model.PagingDto;
 import oracle.java.s20180102.model.ReservDto;
-import oracle.java.s20180102.model.WishDto;
+
 
 @Service
 public class ReservServiceImpl implements ReservService{
@@ -59,6 +58,42 @@ public class ReservServiceImpl implements ReservService{
 	@Override
 	public void upResv(ReservDto resvDto) {
 		resDao.upResv(resvDto);
+	}
+
+	@Override
+	public void upPay(ReservDto resvDto) {
+		resDao.upPay(resvDto);
+	}
+
+	@Override
+	public int updateConfirm(ReservDto resDto) {
+		return resDao.updateConfirm(resDto);
+	}
+
+	@Override
+	public List<ReservDto> selDaliyResv(ReservDto resvDto) {
+		return resDao.selDaliyResv(resvDto);
+	}
+
+
+	@Override
+	public int total_CompleteM(String ID) {
+		return resDao.total_CompleteM(ID);
+	}
+
+	@Override
+	public List<ReservDto> completeListM(PagingDto pdto) {
+		return resDao.completeListM(pdto);
+	}
+	
+	@Override
+	public int total_CompleteG(String ID) {
+		return resDao.total_CompleteG(ID);
+	}
+
+	@Override
+	public List<ReservDto> completeListG(PagingDto pdto) {
+		return resDao.completeListG(pdto);
 	}
 
 

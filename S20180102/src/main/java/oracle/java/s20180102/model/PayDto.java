@@ -3,27 +3,41 @@ package oracle.java.s20180102.model;
 public class PayDto {
 	private String payCode;
 	private String memberId;
-	private int gServNo;
+	private int gservNo;
 	private int amount;
 	private String pay_method;
 	private String buyer_name;
 	private String buyer_email;
 	private String buyer_tel;
 	private String buyer_addr;
-	private String buyer_postCode;
-	private String pComplete;
+	private String pcomplete;
 	
 	//------------------
 	//    지영 추가
 	
-	private String gServTitle;
+	private String gservTitle;
 	private String tourDate;
-		
-	public String getgServTitle() {
-		return gServTitle;
+	private String discount;
+	private String approvNum;
+	
+	
+	public String getApprovNum() {
+		return approvNum;
 	}
-	public void setgServTitle(String gServTitle) {
-		this.gServTitle = gServTitle;
+	public void setApprovNum(String approvNum) {
+		this.approvNum = approvNum;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+	public String getGservTitle() {
+		return gservTitle;
+	}
+	public void setGservTitle(String gservTitle) {
+		this.gservTitle = gservTitle;
 	}
 	public String getTourDate() {
 		return tourDate;
@@ -45,12 +59,6 @@ public class PayDto {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
-	}
-	public int getgServNo() {
-		return gServNo;
-	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
 	}
 	public int getAmount() {
 		return amount;
@@ -88,18 +96,16 @@ public class PayDto {
 	public void setBuyer_addr(String buyer_addr) {
 		this.buyer_addr = buyer_addr;
 	}
-	public String getBuyer_postCode() {
-		return buyer_postCode;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setBuyer_postCode(String buyer_postCode) {
-		this.buyer_postCode = buyer_postCode;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
-	public String getpComplete() {
-		return pComplete;
+	public String getPcomplete() {
+		return pcomplete;
 	}
-	public void setpComplete(String pComplete) {
-		this.pComplete = pComplete;
-	}
-	
-	
+	public void setPcomplete(String pcomplete) {
+		this.pcomplete = pcomplete;
+	}	
 }

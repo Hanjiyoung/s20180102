@@ -1,115 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.main{
+	.footer{
 		background-color: lightGray;
+		text-align: center;
 	}
+	.footer-list {
+		width:300px;
+		display: inline-block;
+	}
+	#footRow {
+		padding-left: 60px;
+	}
+	.footer-sns {
+		margin-top: 30px;	
+	}
+	
+	a {
+		color: black;
+	}
+
 </style>
 </head>
 <body>
-<footer class='main' id='footer'>
-		<div class='container-fluid content-wrap'>
-			<div class='footer-top clear-wrap'>
-				<nav class='nav footer-menu hidden-sm-down clearfix'>
-					<div class='menu-list'>
-						<div class='menu-title'>ABOUT</div>
-						<a data-turbolinks='false' href=''>¼­ºñ½º ¼Ò°³</a> <a
-							data-turbolinks='false' href=''>È¸»ç ¼Ò°³</a> <a
-							data-turbolinks='false' href=''>ÀÌ¿ë¹æ¹ý</a>
-
-					</div>
-					<div class='menu-list menu-list-center'>
-						<div class='menu-title'>PARTNERSHIP</div>
-						<a data-turbolinks='false' href=''>°¡ÀÌµå µî·ÏÇÏ±â</a>
-						<a href='' target='_blank'>B2B Á¦ÈÞ
-							(¿©Çà»ç Àü¿ë)</a> <a data-turbolinks='false' href=''>¸®¾ó°¡ÀÌµå</a>
-						<a href='' target='_blank'>°¡ÀÌµå ºí·Î±×</a>
-					</div>
-					<div class='menu-list menu-list-right'>
-						<div class='menu-title'>HELP</div>
-						<a data-turbolinks='false' href=''>°í°´ ¼¾ÅÍ</a>
-						<a data-turbolinks='false' href=''>ÀÚÁÖ ¹¯´Â Áú¹®</a> <a
-							data-turbolinks='false' href=''>ÀÌ¿ë ¾à°ü</a> <a
-							data-turbolinks='false' href=''>°³ÀÎÁ¤º¸ Ãë±Þ¹æÄ§</a> <a
-							data-turbolinks='false' href=''>Ãë¼Ò ¹× È¯ºÒ Á¤Ã¥</a> <a
-							data-turbolinks='false' href=''>ÃÖÀú°¡ º¸ÀåÁ¦</a>
-					</div>
-				</nav>
-				<ul class='mobile-footer hidden-md-up'>
-					<li class='footer-list'><input checked='checked' id='about'
-						type='checkbox'> <label for='about'>ABOUT</label>
-						<ul>
-							<li><a data-turbolinks='false' href=''>¼­ºñ½º
-									¼Ò°³</a></li>
-							<li><a data-turbolinks='false' href=''>È¸»ç
-									¼Ò°³</a></li>
-							<li><a data-turbolinks='false' href=''>ÀÌ¿ë¹æ¹ý</a>
-							</li>
-
-						</ul></li>
-					<li class='footer-list'><input checked='checked'
-						id='partnership' type='checkbox'> <label for='partnership'>PARTNERSHIP</label>
-						<ul>
-							<li><a data-turbolinks='false' href=''>°¡ÀÌµå
-									µî·ÏÇÏ±â</a></li>
-							<li><a href='' target='_blank'>B2B
-									Á¦ÈÞ (¿©Çà»ç Àü¿ë)</a></li>
-							<li><a data-turbolinks='false' href=''>¸®¾ó°¡ÀÌµå</a>
-							</li>
-							<li><a href='' target='_blank'>°¡ÀÌµå
-									ºí·Î±×</a></li>
-						</ul></li>
-					<li class='footer-list'><input checked='checked' id='help'
-						type='checkbox'> <label for='help'>HELP</label>
-						<ul>
-							<li><a data-turbolinks='false' href=''>°í°´
-									¼¾ÅÍ</a></li>
-							<li><a data-turbolinks='false' href=''>ÀÚÁÖ ¹¯´Â Áú¹®</a>
-							</li>
-							<li><a data-turbolinks='false' href=''>ÀÌ¿ë
-									¾à°ü</a></li>
-							<li><a data-turbolinks='false' href=''>°³ÀÎÁ¤º¸
-									Ãë±Þ¹æÄ§</a></li>
-							<li><a data-turbolinks='false' href=''>Ãë¼Ò ¹×
-									È¯ºÒ Á¤Ã¥</a></li>
-							<li><a data-turbolinks='false' href=''>ÃÖÀú°¡
-									º¸ÀåÁ¦</a></li>
-						</ul></li>
-				</ul>
+<footer class='footer' id='footer'>
+			<div style="height: 60px">
 			</div>
+			<table id="footTable" style="margin: auto">
+				<tr>
+					<th>ABOUT</th>
+					<th id="footRow">HELP</th>
+				</tr>
+				<tr>
+					<td><a data-turbolinks='false' href='introduce.do'>ì„œë¹„ìŠ¤ ì†Œê°œ</a></td>
+					<td id="footRow"><a data-turbolinks='false' href='contentUs.do'>ê³ ê° ì„¼í„°</a></td>	
+				</tr>
+				<tr>
+					<td><a data-turbolinks='false' href='aboutUs.do'>íšŒì‚¬ ì†Œê°œ</a></td>
+					<td id="footRow"><a data-turbolinks='false' href='fna.do'>ìžì£¼ ë¬»ëŠ” ì§ˆë¬¸</a></td>	
+				</tr>
+				<tr>
+					<td><a data-turbolinks='false' href='licensee.do'>ì‚¬ì—…ìžì •ë³´</a></td>
+					<td id="footRow"><a data-turbolinks='false' href='termsOfUse.do'>ì´ìš©ì•½ê´€</a></td>	
+									
+				</tr>
+				<tr>
+					<td></td>
+					<td id="footRow"><a data-turbolinks='false' href='privacy.do'>ê°œì¸ì •ë³´ ì·¨ê¸‰ë°©ì¹¨</a></td>	
+									
+				</tr>
+			</table>
+							
 			<div class='footer-sns'>
 				<a href='https://www.facebook.com' target='_blank'> <img
-					alt='ÆäÀÌ½ººÏ' height='15px'
-					src=''
-					width='15px'>
-				</a> <a href='https://instagram.com' target='_blank'> <img
-					alt='ÀÎ½ºÅ¸±×·¥' height='15px'
-					src=''
-					width='15px'>
-				</a> <a href='http://blog.naver.com' target='_blank'> <img
-					alt='³×ÀÌ¹ö' height='13px'
-					src=''
-					width='15px'>
-				</a> <a href=''> <img alt='ÀÌ¸ÞÀÏ'
-					height='12px'
-					src=''
-					width='18px'>
-				</a>
+					alt='íŽ˜ì´ìŠ¤ë¶' width='50px'
+					src='${pageContext.request.contextPath}/items/facebook1.png'
+					>
+				</a> 
+				<a href='https://instagram.com' target='_blank'> <img
+					alt='ì¸ìŠ¤íƒ€ê·¸ëž¨' width="50px"
+					src='${pageContext.request.contextPath}/items/instagram.png'
+					>
+				</a> 
+				<a href='http://blog.naver.com' target='_blank'> <img
+					alt='ë„¤ì´ë²„'  width='50px'
+					src='${pageContext.request.contextPath}/items/naver.png'
+					>
+				</a> 
 			</div>
-			<p class='copyright'>
-				»óÈ£¸í ÆÈ·Î¹Ì | ´ëÇ¥ : followMe | °³ÀÎÁ¤º¸Ã¥ÀÓÀÚ : ±èÆÈ·Î<br />»ç¾÷ÀÚµî·Ï¹øÈ£ : 999-**-****9 |
-				Åë½ÅÆÇ¸Å¾÷½Å°í¹øÈ£ : Á¦ 2018-¼­¿ï ¼­ÃÊ-**** È£ | <a target='_blank'
-					href=''>»ç¾÷ÀÚÁ¤º¸È®ÀÎ</a><br />¼­¿ïÆ¯º°½Ã
-				¸¶Æ÷±¸ (ÁÖ)followMe<br />´ëÇ¥¹øÈ£ : 070-****-9999 | ÀÏ¹Ý ¹®ÀÇ : help@***.com<br />¿î¿µ½Ã°£(ÇÑ±¹)
-				09:00 ~ 22:00, ÁÖ¸»/°øÈÞÀÏ Æ÷ÇÔ.<br />ÀÚ»ç´Â ¼­¿ïÆ¯º°½Ã°ü±¤ÇùÈ¸ °øÁ¦¿µ¾÷º¸Áõº¸Çè¿¡ °¡ÀÔÀÌ µÇ¾î ÀÖ½À´Ï´Ù.<br />followMe
-				Åë½ÅÆÇ¸ÅÁß°³ÀÚÀÌ¸ç Åë½ÅÆÇ¸ÅÀÇ ´ç»çÀÚ°¡ ¾Æ´Õ´Ï´Ù. µû¶ó¼­ followMeÀº »óÇ°¡¤°Å·¡Á¤º¸ ¹× °Å·¡¿¡ ´ëÇÏ¿© Ã¥ÀÓÀ» ÁöÁö ¾Ê½À´Ï´Ù.<br />
-			</p>
-		</div>
+			<center>
+					<img src="${pageContext.request.contextPath}/items/footer.png" style="width: 600px;">
+			</center>
 	</footer>
 </body>
 </html>

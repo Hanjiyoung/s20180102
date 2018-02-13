@@ -5,16 +5,16 @@
 	<!-- Use type aliases to avoid typing the full classname every time. -->
 	<resultMap id="liResult" type="LikeItDto">
 		<result property="memberId" column="memberId" />
-		<result property="gServNo" column="gServNo" />
+		<result property="gservNo" column="gservNo" />
 	</resultMap>
 
 
 	<insert id="inLikeIt" parameterType="LikeItDto">
-		insert into likeit values(NVL('${memberId}',likeit_seq.nextval),${gServNo})
+		insert into likeit values(NVL('${memberId}',likeit_seq.nextval),${gservNo})
 	</insert>
 	<delete id="delLikeIt" parameterType="LikeItDto">
 		delete likeit 
 		where memberId='${memberId}' 
-		  and gServNo = ${gServNo}
+		  and gServNo = ${gservNo}
 	</delete>
 </mapper>

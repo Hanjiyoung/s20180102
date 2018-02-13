@@ -1,6 +1,6 @@
 package oracle.java.s20180102.model;
 
-public class CodesetDto {
+public class CodeSetDto {
 	private String divCode;
 	private String itemCode;
 	private String itemName;

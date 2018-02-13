@@ -5,11 +5,27 @@ import java.sql.Date;
 public class MsgDto {
 	private String msgSender;
 	private String msgReceiver;
-	private Date msgEndate;
+	private Date msgSendate;
 	private String msgContent;
 	private String msgCheck;
 	private Date msgCheckDate;
 	
+	
+	private String msgImg;
+	private String nickName;
+
+	public String getMsgImg() {
+		return msgImg;
+	}
+	public void setMsgImg(String msgImg) {
+		this.msgImg = msgImg;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getMsgSender() {
 		return msgSender;
 	}
@@ -22,11 +38,12 @@ public class MsgDto {
 	public void setMsgReceiver(String msgReceiver) {
 		this.msgReceiver = msgReceiver;
 	}
-	public Date getMsgEndate() {
-		return msgEndate;
+	
+	public Date getMsgSendate() {
+		return msgSendate;
 	}
-	public void setMsgEndate(Date msgEndate) {
-		this.msgEndate = msgEndate;
+	public void setMsgSendate(Date msgSendate) {
+		this.msgSendate = msgSendate;
 	}
 	public String getMsgContent() {
 		return msgContent;

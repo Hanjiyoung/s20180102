@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;  // 
 import org.springframework.stereotype.Repository;
 
-import oracle.java.s20180102.model.MemberDto;
 import oracle.java.s20180102.model.PagingDto;
 import oracle.java.s20180102.model.PayDto;
 
@@ -24,6 +23,16 @@ public class PayDaoImpl implements PayDao{
 	@Override
 	public List<PayDto> selPayList(PagingDto pdto) {
 		return session.selectList("selPayList", pdto);
+	}
+
+	@Override
+	public void inPay(PayDto pDto) {
+		session.insert("inPay",pDto);
+	}
+
+	@Override
+	public PayDto selOnePay(String payCode) {
+		return session.selectOne("selOnePay", payCode);
 	}
 	
 }

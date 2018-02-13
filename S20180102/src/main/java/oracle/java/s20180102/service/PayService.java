@@ -11,6 +11,8 @@ public interface PayService {
 
 	int total(String iD);
 	List<PayDto> selPayList(PagingDto pdto);                                   // 한 회원의 결제 정보 리스트
+	void inPay(PayDto pDto);                    							   // 결제시
+	PayDto selOnePay(String payCode);                                          // 하나의 결제 정보 가져오기
 
 	
 	//List<PayDto> selPayList(int GservNo);                                  // 가이드 상품별 결제 정보 리스트

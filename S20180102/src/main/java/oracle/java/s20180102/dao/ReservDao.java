@@ -15,5 +15,14 @@ public interface ReservDao {
 	void resvCancel(String payCode);                  // 예약 취소
 	void inResv(ReservDto resvDto);                   // 예약 등록
 	void upResv(ReservDto resvDto);                   // 예약 수정
+	void upPay(ReservDto resvDto);                    // 결제 시, 환불 시 pay_yn update
+	int updateConfirm(ReservDto resDto);
+	List<ReservDto> selDaliyResv(ReservDto resvDto);  // 그 날, 그 상품에 예약한 예약리스트 
+	
+	
+	int total_CompleteG(String iD);
+	List<ReservDto> completeListG(PagingDto pdto);
+	int total_CompleteM(String iD);
+	List<ReservDto> completeListM(PagingDto pdto);
 	
 }

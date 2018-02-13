@@ -2,17 +2,49 @@ package oracle.java.s20180102.model;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDto {
 	private String memberId;
 	private String nickName;
 	private String pw;
 	private String tel;
 	private String addr;
-	private String mName;
+	private String mname;
 	private Date regidate;
-	private int mPoint;
+	private int mpoint;
 	private String authority;
-
+	private String mimg;
+	
+	// 지영 추가
+	private MultipartFile memberImage;
+	//-----------------------------
+	
+	
+	public MultipartFile getMemberImage() {
+		return memberImage;
+	}
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+	public int getMpoint() {
+		return mpoint;
+	}
+	public void setMpoint(int mpoint) {
+		this.mpoint = mpoint;
+	}
+	public String getMimg() {
+		return mimg;
+	}
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
+	public void setMemberImage(MultipartFile memberImage) {
+		this.memberImage = memberImage;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -43,23 +75,11 @@ public class MemberDto {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getmName() {
-		return mName;
-	}
-	public void setmName(String mName) {
-		this.mName = mName;
-	}
 	public Date getRegidate() {
 		return regidate;
 	}
 	public void setRegidate(Date regidate) {
 		this.regidate = regidate;
-	}
-	public int getmPoint() {
-		return mPoint;
-	}
-	public void setmPoint(int mPoint) {
-		this.mPoint = mPoint;
 	}
 	public String getAuthority() {
 		return authority;

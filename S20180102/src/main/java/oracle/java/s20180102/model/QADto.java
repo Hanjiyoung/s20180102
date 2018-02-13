@@ -4,69 +4,104 @@ import java.sql.Date;
 
 public class QADto {
 	private String memberId;
-	private int gServNo;
-	private int QAnumber;
-	private String QAreceiver;
-	private String QAtitle;
-	private String QAcontent;
-	private Date QAcredate;
-	private int QAstep;
-	private String QAcomplete;
+	private int gservNo;
+	private int qaNumber;
+	private String qaReceiver;
+	private String qaTitle;
+	private String qaContent;
+	private Date qaCredate;
+	private int qaStep;
+	private String qaComplete;
 	
+	//소희 추가
+	private String gservTitle; //문의가 어떤 gService에 대하여 작성된 것인지
+	//----------------------
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getgServNo() {
-		return gServNo;
+
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
+
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
-	public int getQAnumber() {
-		return QAnumber;
+
+	public int getQaNumber() {
+		return qaNumber;
 	}
-	public void setQAnumber(int qAnumber) {
-		QAnumber = qAnumber;
+
+	public void setQaNumber(int qaNumber) {
+		this.qaNumber = qaNumber;
 	}
-	public String getQAreceiver() {
-		return QAreceiver;
+
+	public String getQaReceiver() {
+		return qaReceiver;
 	}
-	public void setQAreceiver(String qAreceiver) {
-		QAreceiver = qAreceiver;
+
+	public void setQaReceiver(String qaReceiver) {
+		this.qaReceiver = qaReceiver;
 	}
-	public String getQAtitle() {
-		return QAtitle;
+
+	public String getQaTitle() {
+		return qaTitle;
 	}
-	public void setQAtitle(String qAtitle) {
-		QAtitle = qAtitle;
+
+	public void setQaTitle(String qaTitle) {
+		this.qaTitle = qaTitle;
 	}
-	public String getQAcontent() {
-		return QAcontent;
+
+	public String getQaContent() {
+		return qaContent;
 	}
-	public void setQAcontent(String qAcontent) {
-		QAcontent = qAcontent;
+
+	public void setQaContent(String qaContent) {
+		this.qaContent = qaContent;
 	}
-	public Date getQAcredate() {
-		return QAcredate;
+
+	public Date getQaCredate() {
+		return qaCredate;
 	}
-	public void setQAcredate(Date qAcredate) {
-		QAcredate = qAcredate;
+
+	public void setQaCredate(Date qaCredate) {
+		this.qaCredate = qaCredate;
 	}
-	public int getQAstep() {
-		return QAstep;
+
+	public int getQaStep() {
+		return qaStep;
 	}
-	public void setQAstep(int qAstep) {
-		QAstep = qAstep;
+
+	public void setQaStep(int qaStep) {
+		this.qaStep = qaStep;
 	}
-	public String getQAcomplete() {
-		return QAcomplete;
+
+	public String getQaComplete() {
+		return qaComplete;
 	}
-	public void setQAcomplete(String qAcomplete) {
-		QAcomplete = qAcomplete;
+
+	public void setQaComplete(String qaComplete) {
+		this.qaComplete = qaComplete;
 	}
+
+	public String getGservTitle() {
+		return gservTitle;
+	}
+
+	public void setGservTitle(String gservTitle) {
+		this.gservTitle = gservTitle;
+	}
+
+	
+
+
+	
+	
 	
 	
 }

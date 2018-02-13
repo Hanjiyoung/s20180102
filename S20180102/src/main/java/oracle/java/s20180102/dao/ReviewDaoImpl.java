@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import oracle.java.s20180102.model.PagingDto;
-import oracle.java.s20180102.model.ReservDto;
 import oracle.java.s20180102.model.ReviewDto;
 
 @Repository
@@ -50,6 +49,54 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public void delComment(ReviewDto revDto) {
 		session.delete("delComment", revDto);
+	}
+
+	@Override
+	public int total_Complete(ReviewDto reviewDto) {
+		return session.selectOne("totalRevs",reviewDto);
+
+	}
+
+	@Override
+	public int totalReview() {
+		return session.selectOne("totalReview");
+	}
+
+	@Override
+	public List<ReviewDto> selReviewList(PagingDto pDto) {
+		return session.selectList("selReviewList", pDto);
+	}
+
+	@Override
+	public int totalRevsGno(int gno) {
+		return session.selectOne("totalRevsGno", gno);
+	}
+
+	@Override
+	public List<ReviewDto> selgnoReviewList(PagingDto pDto) {
+		return session.selectList("selgnoReviewList", pDto);
+	}
+
+	@Override
+	public int totalGservNoRevs(int gservNo) {
+		return session.selectOne("totalGservNoRevs", gservNo);
+	}
+
+	@Override
+	public List<ReviewDto> selGsevNoList(PagingDto pdto) {
+		
+		return session.selectList("selGsevNoList", pdto);
+	}
+
+	@Override
+	public int total_CompleteM(String searchKey) {
+		return session.selectOne("total_CompleteM", searchKey);
+	}
+
+	@Override
+	public List<ReviewDto> completeListM(String searchKey) {
+		return session.selectList("completeListM", searchKey);
+
 	}
 
 	

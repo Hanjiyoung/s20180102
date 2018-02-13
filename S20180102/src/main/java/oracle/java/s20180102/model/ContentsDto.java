@@ -1,28 +1,36 @@
 package oracle.java.s20180102.model;
 
 public class ContentsDto {
-	private int gServNo;
-	private String gServIntro;
-	private String gServOrder;
+	private int gservNo;
+	private String gservIntro;
+	private String gservOrder;
 	private String imgSrc;
+	private String introTitle;
 	
-	public int getgServNo() {
-		return gServNo;
+	
+	public String getIntroTitle() {
+		return introTitle;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
+	public void setIntroTitle(String introTitle) {
+		this.introTitle = introTitle;
 	}
-	public String getgServIntro() {
-		return gServIntro;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServIntro(String gServIntro) {
-		this.gServIntro = gServIntro;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
-	public String getgServOrder() {
-		return gServOrder;
+	public String getGservIntro() {
+		return gservIntro;
 	}
-	public void setgServOrder(String gServOrder) {
-		this.gServOrder = gServOrder;
+	public void setGservIntro(String gservIntro) {
+		this.gservIntro = gservIntro;
+	}
+	public String getGservOrder() {
+		return gservOrder;
+	}
+	public void setGservOrder(String gservOrder) {
+		this.gservOrder = gservOrder;
 	}
 	public String getImgSrc() {
 		return imgSrc;

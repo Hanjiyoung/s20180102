@@ -4,113 +4,90 @@
 <mapper namespace="GServDto">
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <resultMap id="GServDtoResult" type="GServDto">
-    <result property="gNo" column="gNo"/>
-    <result property="gServNo" column="gServNo"/>
-    <result property="gServTitle" column="gServTitle"/>
-    <result property="gServGps" column="gServGps"/>
-    <result property="gServLeadTime" column="gServLeadTime"/>
-    <result property="gServSub" column="gServSub"/>
-    <result property="gServArea" column="gServArea"/>
+    <result property="gno" column="gno"/>
+    <result property="gservNo" column="gservNo"/>
+    <result property="gservTitle" column="gservTitle"/>
+    <result property="gservGps" column="gservGps"/>
+    <result property="gservLeadTime" column="gservLeadTime"/>
+    <result property="gservSub" column="gservSub"/>
+    <result property="gservArea" column="gservArea"/>
     <result property="memSizeMin" column="memSizeMin"/>
     <result property="memSizeMax" column="memSizeMax"/>
-    <result property="gServLang" column="gServLang"/>
+    <result property="gservLang" column="gservLang"/>
     <result property="pickUpLoc" column="pickUpLoc"/>
     <result property="pickUpTime" column="pickUpTime"/>
-    <result property="pInclude" column="pInclude"/>
+    <result property="pinclude" column="pinclude"/>
     <result property="notPInclude" column="notPInclude"/>
     <result property="caution" column="caution"/>
-    <result property="gServSDate" column="gServSDate"/>
-    <result property="gServEDate" column="gServEDate"/>
-    <result property="gServDay" column="gServDay"/>
-    <result property="gServCreDate" column="gServCreDate"/>
-    <result property="gServFixDate" column="gServFixDate"/>
-    <result property="gServLock" column="gServLock"/>
+    <result property="gservSDate" column="gservSDate"/>
+    <result property="gservEDate" column="gservEDate"/>
+    <result property="gservDay" column="gservDay"/>
+    <result property="gservCreDate" column="gservCreDate"/>
+    <result property="gservFixDate" column="gservFixDate"/>
+    <result property="gservLock" column="gservLock"/>
+    <result property="mainView" column="mainView"/>
   </resultMap>
   
   <!-- 지영 -->
-  <resultMap id="tcResult" type="TourCardDto">
+  	<resultMap id="tcResult" type="TourCardDto">
 		<result property="rn" column="rn" />
 		<result property="imgSrc" column="imgSrc" />
-		<result property="gImg" column="gImg" />
+		<result property="gimg" column="gimg" />
 		<result property="nickName" column="nickName" />
-		<result property="gServTitle" column="gServTitle" />
-		<result property="gServSub" column="gServSub" />
-		<result property="gServLeadTime" column="gServLeadTime" />
+		<result property="gservTitle" column="gservTitle" />
+		<result property="gservSub" column="gservSub" />
+		<result property="gservLeadTime" column="gservLeadTime" />
 		<result property="likeIt" column="likeIt" />
 		<result property="remainSize" column="remainSize" />
-		<result property="gServNo" column="gServNo" />
-		<result property="gServPrice" column="gServPrice" />
+		<result property="gservNo" column="gservNo" />
+		<result property="gservPrice" column="gservPrice" />
 		<result property="heart" column="heart" />
+		<result property="servTag" column="servTag" />
+		<result property="areaCode" column="areaCode" />
+		<result property="gservArea" column="gservArea" />
+		<result property="gservDay" column="gservDay" />
+		<result property="rvCnt" column="rvCnt" />
+		<result property="gservSDate" column="gservSDate" />
+		<result property="gservEDate" column="gservEDate" />
 	</resultMap>
   
-  
-  
-  
-  <select id="oneTourCard" parameterType="ReservDto" resultMap="tcResult">
-  	 Select sv.gno, sv.gservno, sv.gServtitle, cs.itemname gServSub, sv.gServPrice, Decode(lt.gServNo,sv.gServNo,'1','0') heart,
-			            sv.gServLeadtime, lk.cnt likeit, ct.imgSrc, gd.gImg, mb.nickname, (sv.memsizemax-NVL(rv.cnt,0)) remainSize
-			     From     gService sv 
-			          ,   codeset  cs
-			          ,   contents ct
-			          ,   guide    gd
-			          ,   member   mb
-			          , ( select distinct gServNo from likeit
-			           ) le
-			          , ( select gServNo from likeit where memberID = '${memberId}'
-			              group by gServNo 
-			           ) lt
-			          , ( select gServno, count(*) cnt from likeit
-			              group by gServno
-			           ) lk
-			          , ( select gServno, count(*) cnt from reservation 
-			               group by gServno
-			           ) rv 
-			      Where  sv.gServsub = cs.itemcode(+)
-			       and   sv.gServno  = lk.gServno(+) 
-			       and   sv.gServno = ct.gServno(+)
-			       and   sv.gServNo = lt.gServNO(+)
-			       and   cs.DIVCODE = '02'
-			       and   ct.GSERVORDER = '1'
-			       and   sv.gno = gd.gno(+)
-			       and   sv.gServNo = le.gServNo(+)
-			       and   sv.gServno = rv.gServno(+)
-			       and   mb.memberId = gd.memberId
-			       and   sv.gServno = ${gServNo}
-  </select>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   <!-- 태욱 -->
-  
+	
+	<select id="selTotalPayG" parameterType="GServDto" resultType="int">
+		select count(*)
+		from gservice g, (select gservNo, tourdate, sum(rememsize) sum from reservation where gno = #{gno} and SUCCESS_YN = 'y' and sysdate &gt; TOURDATE  group by gservNo, tourdate) r
+		where r.gservno = g.gservNo <if test="startSearch != null">and tourdate &gt;= #{startSearch}</if>
+		<if test="endSearch != null">and tourdate &lt;= #{endSearch}</if> <if test="gservNo != 0">and g.gservNo like '%${gservNo}%'</if>
+		order by r.tourdate desc
+	</select>
+	
+  	<insert id="inCost" parameterType="AccountingDto">
+  		insert into accounting
+    		 values(#{gno}, sysdate, null, #{balance}, #{inCost})
+  	
+  	</insert>
+  	<insert id="inAccounting" parameterType="AccountingDto">
+		insert into accounting values(#{gno}, sysdate,#{paymentCost},#{balance},null)	
+	</insert>
+	
    <select id="listAll" parameterType="GServDto" resultMap="GServDtoResult">
-      select * from (select rownum rn, a.* from (select * from gService
-    	 order by gServno) a) where rn between #{start} and
-    	 #{end} <if test="gNo!=null">and gno in #{gNo}</if>   	
+      select * from (select rownum rn, a.* from (select * from gservice <if test="gservNo != null and gservNo != 0">where gservNo in #{gservNo}</if>
+    	 order by gservno ) a <if test="gno != null and gno != 0">where gno in #{gno}</if>) where rn between #{start} and
+    	 #{end}	
    </select>
-    <select id="total" resultType="int">
-  	select count(*) from gService
+    <select id="totalGserv" resultType="int">
+  	select count(*) from gservice
    </select>
-   <select id="gNoServTotal" parameterType="int" resultType="int">
-  	select count(*) from gService where gServNo=#{gServNo}
+   <select id="totalGnoServ" parameterType="int" resultType="int">
+  	select count(*) from gservice where gno = #{gno}
    </select>
-   
-   <select id="oneGServ" parameterType="int" resultType="gServDto">
+    <select id="GservResList" parameterType="int" resultMap="GServDtoResult">
+   	select g.*, r.sum rememsize, r.tourdate tourdate
+	from gservice g, (select gservNo, tourdate, sum(rememsize) sum from reservation where gno = #{gno}  and CANCEL_YN = 'n'  group by gservNo, tourdate) r
+ 	where r.gservno = g.gservNo and g.memSizemin &lt;= r.sum
+   </select>
+   <select id="oneGserv" parameterType="int" resultType="GServDto">
   		select c1.itemName Subname,
 			case 
 			when c2.itemcode like '01%' and c2.itemcode!='0100' then '서울시 '
@@ -131,39 +108,125 @@
 			when c2.itemcode like '16%' and c2.itemcode!='1600' then '제주도 '
 			else ''
 			end||c2.itemName AreaName, g.*
-			from Gservice g, codeSet c1, codeSet c2
-			where  (g.gServSub = c1.itemcode and c1.divcode=02)
-			and    (g.gServArea = c2.itemcode and c2.divcode=01) and gServNo=#{gServNo}
+			from gservice g, codeSet c1, codeSet c2
+			where  (g.gservSub = c1.itemcode and c1.divcode=02)
+			and (g.gservArea = c2.itemcode and c2.divcode=01) and gservNo=#{gservNo}
    </select>
    
-  <!--  <select id="selectManager"  resultMap="EmpResult"> -->
-   <!-- <select id="selectManager"  resultType="Emp">
-      select * from emp where empno  in (select mgr from emp)
-   </select>
-   
-   <select id="detail" parameterType="int" resultType="Emp">
-   	 select * from emp  where empno = #{empno}
-   </select>
-   
-    <update id="update" parameterType="Emp">
-	 update emp set ename=#{ename},job=#{job},mgr=#{mgr},
-	    <if test="hiredate!=''">hiredate=#{hiredate},</if>
-	    sal=#{sal}, 
-	    <if test="comm!=null"> 	comm=#{comm},    </if>
-	    deptno=#{deptno} where empno=#{empno}
+   <update id="updateGserv" parameterType="GservContentsVo">
+	   	update gservice set
+		  gservTITLE = '${gservTitle}', gservGPS = '${gservGps}', gservLeadTime = ${gservLeadTime}, 
+		  gservPrice = ${gservPrice}, memSizeMin = ${memSizeMin}, memSizeMax = ${memSizeMax}, 
+		  gservLang = '${gservLang}', pickupTime = '${pickUpTime}', ServTag = '${servTag}',
+		  pinclude = '${pinclude}', notPInclude = '${notPInclude}',  
+		  gservLock = '${gservLock}', gservFIXDATE = sysdate
+		  <if test="pickUpLoc != null">,pickupLoc = '${pickUpLoc}'</if>
+		  <if test="caution != null">,caution = '${caution}'</if>
+		  <if test='gservArea.equals("SELECT")'>,gservAREA = '${gservArea}'</if>
+		  <if test="gservSDate != null">,gservsDate = '${gservSDate}'</if>
+		  <if test="gservEDate != null">,gserveDate = '${gservEDate}'</if>
+		  <if test="gservSub != null">,gservSub = '${gservSub}'</if>
+		  <if test="gservDay != null">,gservDay = '${gservDay}'</if>
+		where gservNo = ${gservNo}
    </update>
    
-   <insert id="insert" parameterType="Emp">
-	 insert into emp values (#{empno},#{ename},#{job},#{mgr},
-	    #{hiredate},#{sal},#{comm},#{deptno} ) 
-  </insert>
-  
-   <insert id="insert2" parameterType="Crawling">
-	 insert into tbl_Crawling values (CRAWL_SEQ.nextval,#{url},#{title},#{content}, sysdate ) 
-  </insert>
-  
+   <select id="selGservNo" parameterType="int" resultType="int">
+   		select max(gservNo)+1 from gservice where gno=#{gno}
+   </select>
    
-  <delete id="delete" parameterType="int">
-    delete from emp where empno=#{empno}
-  </delete>  -->
+   <insert id="inGserv" parameterType="GservContentsVo">
+   		insert into gservice
+   		values(#{gno}, #{gservNo}, #{gservTitle},#{gservGps}, #{gservLeadTime}, #{gservSub}, #{gservArea}, 
+   		#{gservPrice}, #{memSizeMin}, #{memSizeMax}, #{gservLang}, #{pickUpLoc}, #{pickUpTime}, #{servTag}, 
+   		#{pinclude}, #{notPInclude}, #{caution}, #{gservSDate}, #{gservEDate}, #{gservDay}, sysdate, sysdate, #{gservLock},'n')
+   </insert>
+   
+   <update id="uplock" parameterType="GServDto">
+   		update gservice 
+   		   Set gservLock = #{gservLock} 
+   		 Where gservNo = #{gservNo}
+   </update>
+   
+   <select id="gservResList" parameterType="int" resultMap="GServDtoResult">
+	   	select g.*, r.sum rememsize, r.tourdate tourdate
+		from gservice g, (select gservNo, tourdate, sum(rememsize) sum from reservation where gno = #{gno}  and CANCEL_YN = 'n'  group by gservNo, tourdate) r
+		where r.gservno = g.gservNo
+   </select>
+   
+  	<select id="gservPayList" parameterType="GServDto" resultMap="GServDtoResult">
+	   	select * from
+	   	(select g.*, r.sum rememsize, r.tourdate tourdate, rownum rn
+		from gservice g, (select gservNo, tourdate, sum(rememsize) sum from reservation where gno = #{gno} and SUCCESS_YN = 'y' and sysdate &gt; TOURDATE  group by gservNo, tourdate) r
+		where r.gservno = g.gservNo <if test="startSearch != null">and tourdate &gt;= #{startSearch}</if>
+		<if test="endSearch != null">and tourdate &lt;= #{endSearch}</if> <if test="gservNo != 0">and g.gservNo like '%${gservNo}%'</if>
+		order by r.tourdate desc) a
+		where rn between #{start} and #{end}
+	</select> 
+	
+   <select id="selgNo" parameterType="java.lang.String" resultType="int">
+		select g.gNo from member m, guide g where m.memberId=g.memberId and g.memberid = #{memberId} 
+	</select>
+	
+   <select id="totalnLock" parameterType="int" resultType="int">
+  	select count(*) from gservice where gno = #{gno} and (gServLock='y' or gServLock='Y')
+   </select>
+
+<!-- 태욱추가 -->
+	<delete id="delServ" parameterType="int">
+		delete gservice where gservNo=#{gservNo}
+	</delete>
+	<update id="upMainView" parameterType="GServDto">
+		update gservice 
+		   Set mainView = #{mainView} 
+		 Where gServNo = #{gservNo}
+	</update>
+<!-- 태욱추가 -->  
+  
+<!-- 소희 0109 -->  
+<!-- 일단 gservTitle만 넣고 나중에 필요하면 더 추가하도록 하자.. -->
+  	<resultMap id="showgservTitle" type="GServDto">
+  		<result property="gservTitle" column="gservTitle"></result>
+  	</resultMap>
+<!-- resultMap -->  
+
+<!-- 소히 -->
+<!--   해당 가이드가 제공하는 gservice의 제목(gservTitle)을 출력하려함 --> 
+	<select id="selGservList" parameterType="java.lang.String" resultMap="showgservTitle">
+		select * from gservice g,Guide u
+		where u.memberID = #{Id} 
+		and g.gno = u.gno
+	</select> 
+ 
+ <!-- 지영 --> 
+
+  <select id="oneTourCard" parameterType="ReservDto" resultMap="tcResult">
+  	      Select rownum rn, tc.*, Decode(lt.gservNo,tc.gservNo,'1','0') heart, NVL(rv.cnt,0)rvCnt 
+		    From v_tourcard tc,
+                 (  Select count(*) cnt , gservno 
+                      From review 
+                     Where rsTEP = 0 
+                     Group by gservNo) rv,
+		         (  Select * 
+		              From likeit 
+		             Where memberId = '${memberId}') lt 
+		   Where tc.gservNo=lt.gservNo(+)
+             and tc.gservNo=rv.gservNo(+)
+             and tc.gservNo=${gservNo}
+  </select>
+  
+  <select id="selRecommendGserv" parameterType="java.lang.String" resultMap="tcResult" >
+  		 Select rownum rn, tc.*, Decode(lt.gservNo,tc.gservNo,'1','0') heart, NVL(rv.cnt,0)rvCnt 
+		    From v_tourcard tc,
+                 (  Select count(*) cnt , gservno 
+                      From review 
+                     Where rsTEP = 0 
+                     Group by gservNo) rv,
+		         (  Select * 
+		              From likeit 
+		             Where memberId = '${value}') lt 
+		   Where tc.gservNo=lt.gservNo(+)
+             and tc.gservNo=rv.gservNo(+)
+             and mainView = 'y'
+  </select>
+   
 </mapper>

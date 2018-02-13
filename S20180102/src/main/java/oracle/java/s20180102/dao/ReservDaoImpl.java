@@ -55,4 +55,44 @@ public class ReservDaoImpl implements ReservDao {
 		session.update("upResv", resvDto);
 	}
 
+	@Override
+	public void upPay(ReservDto resvDto) {
+		session.update("upPay", resvDto);
+	}
+
+	@Override
+	 public int updateConfirm(ReservDto resDto) {
+	 		if(resDto.getConfirm().equals("Y")) {
+	 			return session.update("upConfirmY", resDto);
+	 		} else if(resDto.getConfirm().equals("N")){
+	 			return session.update("upConfirmN", resDto);
+	 		}
+	 		return 0;
+	 	}
+
+	@Override
+	public List<ReservDto> selDaliyResv(ReservDto resvDto) {
+		return session.selectList("selDaliyResv", resvDto);
+	}
+	
+
+	@Override
+	public List<ReservDto> completeListG(PagingDto pdto) {
+		return session.selectList("completeListG",pdto);
+	}
+
+	@Override
+	public int total_CompleteG(String ID) {
+		return session.selectOne("total_CompleteG",ID);
+	}
+
+	@Override
+	public List<ReservDto> completeListM(PagingDto pdto) {
+		return session.selectList("completeListM",pdto);
+	}
+
+	@Override
+	public int total_CompleteM(String search) {
+		return session.selectOne("total_CompleteM",search);
+	}
 }

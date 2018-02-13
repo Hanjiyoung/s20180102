@@ -5,72 +5,166 @@
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <resultMap id="RevResult" type="ReviewDto">
     <result property="memberId" column="memberId"/>
-    <result property="gServNo" column="gServNo"/>
+    <result property="gservNo" column="gservNo"/>
     <result property="nickName" column="nickName"/>
-    <result property="rTitle" column="rTitle"/>
-    <result property="rContent" column="rContent"/>
-    <result property="rImg" column="rImg"/>
-    <result property="rStar" column="rStar"/>
-    <result property="rHit" column="rHit"/>
-    <result property="rGroup" column="rGroup"/>
-    <result property="rStep" column="rStep"/>
-    <result property="rIndent" column="rIndent"/>
-    <result property="rCredate" column="rCredate"/>
-    <result property="gServTitle" column="gServTitle"/>
+    <result property="rtitle" column="rtitle"/>
+    <result property="rcontent" column="rcontent"/>
+    <result property="rimg" column="rimg"/>
+    <result property="rstar" column="rstar"/>
+    <result property="rhit" column="rhit"/>
+    <result property="rgroup" column="rgroup"/>
+    <result property="rstep" column="rstep"/>
+    <result property="rindent" column="rindent"/>
+    <result property="rcredate" column="rcredate"/>
+    <result property="gservTitle" column="gservTitle"/>
+    <result property="payCode" column="payCode"/>
   </resultMap>
     
    <insert id="inReview" parameterType="ReviewDto">
    		  insert into review values (
-   		  		'${memberId}', ${gServNo}, '${nickName}', '${rTitle}',
-   		  		'${rContent}', '${rImg}', ${rStar}, 0, review_seq.nextval,
-   		  		0, 0, sysdate)
+   		  		'${memberId}', ${gservNo}, '${nickName}', '${rtitle}',
+   		  		'${rcontent}', '${rimg}', ${rstar}, 0, review_seq.nextval,
+   		  		0, 0, sysdate, '${payCode}')
    </insert>
    
    <select id="oneReview" parameterType="ReviewDto" resultMap="RevResult">
   	 	   select rev.*, gs.gServTitle
    			 from review rev, gService gs
-   		    where memberId='${memberId}'
-   			  and rev.gServNo=${gServNo}
-   			  and rev.gServNo = gs.gServNo
+   		    where memberId    = '${memberId}'
+   			  and rev.gServNo =  ${gservNo}
+   			  and rev.payCode = '${payCode}'
+   			  and rev.gServNo =  gs.gServNo
    			  and rev.rstep=0
    </select>
+   
       
   <select id="oneReviewList" parameterType="ReviewDto" resultMap="RevResult">
   		   Select * 
   		    From review 
-  		    Where gServNo=${gServNo} 
-  		      and rGroup=${rGroup} 
+  		    Where gServNo=${gservNo} 
+  		      and rGroup=${rgroup} 
   		      and rStep != 0
   		    Order by rStep
   </select>
   
+  
    <update id="upReview" parameterType="ReviewDto">
    		update review
-   		   set rTitle ='${rTitle}', rContent='${rContent}', rImg ='${rImg}',
-   		       rStar  =${rStar}, rHit=0, rGroup=${rGroup}, 
-   		       rStep=0, rIndent=0, rCredate=sysdate 
+   		   set rTitle ='${rtitle}', rContent='${rcontent}', rImg ='${rimg}',
+   		       rStar  =${rstar}, rHit=0, rGroup=${rgroup}, 
+   		       rStep=0, rIndent=0, rCredate=sysdate, payCode='${payCode}' 
    		 where memberId='${memberId}' 
-   		   and gServNo=${gServNo}
+   		   and gServNo=${gservNo}
    		   and rStep=0
+   		   and payCode ='${payCode}'
    </update>
+  
   
    <insert id="inComment" parameterType="ReviewDto">
    		insert into review values (
-   		  		'${memberId}', ${gServNo}, '${nickName}', '',
-   		  		'${rContent}', '', 0, 0, ${rGroup},
-   		  		(select Max(rStep)+1 from review where gServNo=${gServNo}), 0, sysdate)
+   		  		'${memberId}', ${gservNo}, '${nickName}', '',
+   		  		'${rcontent}', '', 0, 0, ${rgroup},
+   		  		(select Max(rStep)+1 
+   		  		   from review 
+   		  		  where gServNo=${gservNo}
+   		  		 	and rgroup = ${rgroup}),
+   		  		 0, sysdate, '${payCode}')
    </insert>
+   
+   
    
    <delete id="delReview" parameterType="ReviewDto">
    		Delete review 
-   		 Where rGroup  = ${rGroup} 
-   		   and gServNo = ${gServNo}
+   		 Where rGroup  = ${rgroup} 
+   		   and gServNo = ${gservNo}
+   		   and payCode = '${payCode}'
    </delete>
+   
    
    <delete id="delComment" parameterType="ReviewDto">
    		Delete review
-   		 Where rGroup  = ${rGroup}
-   		   and gServNo = ${gServNo}
-   		   and rStep   = ${rStep} 
+   		 Where rGroup  = ${rgroup}
+   		   and gServNo = ${gservNo}
+   		   and rStep   = ${rstep} 
+   		   and payCode = '${payCode}'
    </delete>
+   
+   	<select id="selReviewList" parameterType="PagingDto" resultMap="RevResult">
+		Select * 
+		  From ( Select rownum rn, r.*,gs.gservTitle 
+		  		 From review r, gservice gs
+		  		 Where rStep=0 
+		  		   and r.gservNo = gs.gservNo
+		  		 Order by rCredate desc
+		) where rn between ${start} and ${end} 
+	</select>
+	
+	<select id="totalReview" resultType="int">
+	     Select count(*) 
+		  From review 
+		 Where rStep = 0
+	</select>
+	
+   	<select id="selgnoReviewList" parameterType="PagingDto" resultMap="RevResult">
+		select * 
+		from 
+		  (select rownum rn, a.* 
+		   from (select r.*, g.gservTitle 
+		           from review r, GSERVICE g
+		          where r.rStep=0 
+		          	and r.gservno= g.gservno 
+		          	and r.gServno in (
+		         							  select gservNo 
+		                                       from gService 
+		                                       where gno = #{gno} and gservLock = 'y') 
+		                                       order by rCredate) a )
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="totalRevsGno" parameterType="int" resultType="int">
+		Select count(*) from review 
+		 where rStep=0 
+		   and gServno in (select gservNo 
+		    			     from gService 
+		    			    where gno = #{gno} 
+		    			      and gservLock = 'y') order by rCredate
+	</select>
+	
+	<select id="selGsevNoList" parameterType="PagingDto" resultMap="RevResult">
+		 Select *
+		  From ( Select rownum rn, r.*
+		  		   From (    Select * 
+                              From  review
+                             Where  gservNo = ${gservNo}
+                             Order by rGroup desc, rstep, rcredate  ) r )
+         Where rn between ${start} and ${end}
+	</select>
+	
+	<select id="totalGservNoRevs" parameterType="int" resultType="int">
+		Select count(*) 
+		  From review 
+		 Where rStep=0 
+		   and gServno = #{gservNo}
+   	</select>
+	
+	<select id="completeListM" parameterType="java.lang.String"
+		resultMap="RevResult">
+		Select rev.*, gs.gservTitle
+		From review rev, gService gs
+		Where rStep = 0
+		and rev.gServNo = gs.gServNo
+		and rev.gservNo in (Select gservNo
+		from gservice
+		where gservTitle Like '%${value }%')
+	</select>
+
+	<select id="total_CompleteM" parameterType="java.lang.String"
+		resultType="int">
+		select count(*) from review
+		Where rStep = 0
+		and gservNo in (Select gservNo
+		from gservice
+		where gservTitle Like '%${value }%')
+	</select>
+	
 </mapper>

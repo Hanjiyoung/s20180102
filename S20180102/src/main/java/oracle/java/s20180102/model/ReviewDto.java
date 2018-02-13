@@ -2,43 +2,54 @@ package oracle.java.s20180102.model;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewDto {
 	private String memberId;
-	private int gServNo;
+	private int gservNo;
 	private String nickName;
-	private String rTitle;
-	private String rContent;
-	private String rImg;
-	private int rStar;
-	private int rHit;
-	private int rGroup;
-	private int rStep;
-	private int rIndent;
-	private Date rCredate;
+	private String rtitle;
+	private String rcontent;
+	private String rimg;
+	private int rstar;
+	private int rhit;
+	private int rgroup;
+	private int rstep;
+	private int rindent;
+	private Date rcredate;
 	
 	
+	//--- 지영 추가
+	private String payCode;
+	private String gservTitle;
+	private MultipartFile[] images;
+	private String[] rimgs;
+	//-------------
 	
-	private String gServTitle;
 	
-	
-	
-	public String getgServTitle() {
-		return gServTitle;
-	}
-	public void setgServTitle(String gServTitle) {
-		this.gServTitle = gServTitle;
-	}
 	public String getMemberId() {
 		return memberId;
+	}
+	public String[] getRimgs() {
+		return rimgs;
+	}
+	public void setRimgs(String[] rimgs) {
+		this.rimgs = rimgs;
+	}
+	public String getPayCode() {
+		return payCode;
+	}
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getgServNo() {
-		return gServNo;
+	public int getGservNo() {
+		return gservNo;
 	}
-	public void setgServNo(int gServNo) {
-		this.gServNo = gServNo;
+	public void setGservNo(int gservNo) {
+		this.gservNo = gservNo;
 	}
 	public String getNickName() {
 		return nickName;
@@ -46,61 +57,77 @@ public class ReviewDto {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getrTitle() {
-		return rTitle;
+	public String getRtitle() {
+		return rtitle;
 	}
-	public void setrTitle(String rTitle) {
-		this.rTitle = rTitle;
+	public void setRtitle(String rtitle) {
+		this.rtitle = rtitle;
 	}
-	public String getrContent() {
-		return rContent;
+	public String getRcontent() {
+		return rcontent;
 	}
-	public void setrContent(String rContent) {
-		this.rContent = rContent;
+	public void setRcontent(String rcontent) {
+		this.rcontent = rcontent;
 	}
-	public String getrImg() {
-		return rImg;
+	public String getRimg() {
+		return rimg;
 	}
-	public void setrImg(String rImg) {
-		this.rImg = rImg;
+	public void setRimg(String rimg) {
+		this.rimg = rimg;
 	}
-	public int getrStar() {
-		return rStar;
+	public int getRstar() {
+		return rstar;
 	}
-	public void setrStar(int rStar) {
-		this.rStar = rStar;
+	public void setRstar(int rstar) {
+		this.rstar = rstar;
 	}
-	public int getrHit() {
-		return rHit;
+	public int getRhit() {
+		return rhit;
 	}
-	public void setrHit(int rHit) {
-		this.rHit = rHit;
+	public void setRhit(int rhit) {
+		this.rhit = rhit;
 	}
-	public int getrGroup() {
-		return rGroup;
+	public int getRgroup() {
+		return rgroup;
 	}
-	public void setrGroup(int rGroup) {
-		this.rGroup = rGroup;
+	public void setRgroup(int rgroup) {
+		this.rgroup = rgroup;
 	}
-	public int getrStep() {
-		return rStep;
+	public int getRstep() {
+		return rstep;
 	}
-	public void setrStep(int rStep) {
-		this.rStep = rStep;
+	public void setRstep(int rstep) {
+		this.rstep = rstep;
 	}
-	public int getrIndent() {
-		return rIndent;
+	public int getRindent() {
+		return rindent;
 	}
-	public void setrIndent(int rIndent) {
-		this.rIndent = rIndent;
+	public void setRindent(int rindent) {
+		this.rindent = rindent;
 	}
-	public Date getrCredate() {
-		return rCredate;
+	public Date getRcredate() {
+		return rcredate;
 	}
-	public void setrCredate(Date rCredate) {
-		this.rCredate = rCredate;
+	public void setRcredate(Date rcredate) {
+		this.rcredate = rcredate;
 	}
+	public MultipartFile[] getImages() {
+		return images;
+	}
+	public void setImages(MultipartFile[] images) {
+		this.images = images;
+	}
+	public String getGservTitle() {
+		return gservTitle;
+	}
+	public void setGservTitle(String gservTitle) {
+		this.gservTitle = gservTitle;
+	}
+
 	
+	
+	
+
 	
 	
 }
